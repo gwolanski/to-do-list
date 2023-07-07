@@ -1,0 +1,75 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.body-container {
+    display: grid;
+    grid-template-columns: 200px auto;
+    height: 100vh;
+}
+
+#header-container {
+    display: grid;
+    grid-template-columns: 100px auto;
+    align-items: center;
+    background-color: rgb(109, 163, 141);
+    padding: 15px;
+    font-size: 1.4rem;
+}
+
+#sidebar-container {
+    background-color: rgb(39, 63, 54);
+    color: white;
+    padding-left: 10px;
+}
+
+.sidebar-section {
+    padding: 30px 0;
+}
+
+.nav-container {
+    display: grid;
+    grid-template-columns: 30px 4fr;
+    align-items: center;
+    font-size: 1.3rem;
+    gap: 10px;
+    padding-bottom: 15px;
+}
+
+.nav-icon {
+    justify-self: center;
+}
+
+#project-header {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration-line: underline;
+    padding-bottom: 15px;
+}
+
+#new-project {
+    display: grid;
+    grid-template-columns: 30px 4fr;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: rgba(128, 128, 128, 0.491);
+    border-radius: 10px;
+    width:max-content;
+    gap: 10px;
+    padding: 7px;
+    margin-top: 20px;
+}
+
+.project-container {
+    display: grid;
+    grid-template-columns: 4fr 30px;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 1.2rem;
+}
