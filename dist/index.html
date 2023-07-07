@@ -6,8 +6,43 @@
         <title>To-Do List</title>
     </head>
     <body>
-        <h1>To-Do List</h1>
+        <div id="header-container">
+            <img width="70" height="70" src="./images/task.png" alt="task">
+            <h1 id="page-header">To-Do List</h1>
+        </div>
+        <div class="body-container">
+            <div id="sidebar-container">
+                <div class="sidebar-section" id="top-sidebar">
+                    <div class="nav-container">
+                        <img class="nav-icon" width="27" height="27" src="./images/inbox.png" alt="inbox">
+                        <div class="nav-text">All Tasks</div>
+                    </div>
+                    <div class="nav-container">
+                        <img class="nav-icon" width="32" height="32" src="./images/time.png" alt="time"/>
+                        <div class="nav-text">Today</div>
+                    </div>
+                    <div class="nav-container">
+                        <img class="nav-icon" width="24" height="24" src="./images/calendar.png" alt="calendar">
+                        <div class="nav-text">Week</div>
+                    </div>
+                </div>
+                <div class="sidebar-section" id="bottom-sidebar">
+                    <div id="project-header">Projects</div>
+                    <div class="project-container">
+                        <div class="nav-text">Example</div>
+                        <img class="delete" width="20" height="20" src="./images/trash.png" alt="trash" >
+                    </div>
+                    <div id="new-project">
+                        <img class="nav-icon" width="30" height="30" src="./images/plus.png" alt="plus">
+                        <div class="nav-text">New Project</div>
+                    </div>
 
+                </div>
+            </div>
+            <div id="main-body">
+
+            </div>
+        </div>
     
         <script src ="main.js"></script>
     </body>
