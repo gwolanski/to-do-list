@@ -40,7 +40,37 @@
                 </div>
             </div>
             <div id="main-body">
-
+                <div id="new-task-container">
+                    <img class="nav-icon" width="30" height="30" src="./images/plus.png" alt="plus">
+                    <div id="new-task-text">New Task</div>
+                </div>
+                <div id="form-container">
+                    <form id="task-form" required>
+                        <div id="form-title">New Task</div>
+                        <div class="title form-item">
+                            <label for="title" class="form-label">Title:</label>
+                            <input type="text" name="title" id="small-text-input" class="form-input" required>
+                        </div>
+                        <div class="description form-item">
+                            <label for="description">Description:</label>
+                            <input type="text" name="description" id="large-text-input">
+                        </div>
+                        <div class="date form-item">
+                            <label for="date">Date placeholder</label>
+                            <input type="text" name="date">
+                        </div>
+                        <div class="priority form-item">
+                            <label for="priority">Priority: </label>
+                            <select name="priority" id="">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Submit" id="submit-button">
+                        <button id="close-button">X</button>
+                    </form>
+                </div>
             </div>
         </div>
     

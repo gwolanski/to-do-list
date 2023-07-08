@@ -1,1 +1,1 @@
-console.log("hi");
+(()=>{"use strict";document.getElementById("new-task-container").addEventListener("click",(e=>{document.getElementById("form-container").style.display="block"})),document.getElementById("close-button").addEventListener("click",(e=>{document.getElementById("form-container").style.display="none"})),console.log("hi")})();
