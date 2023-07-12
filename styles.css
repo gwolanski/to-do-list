@@ -46,24 +46,33 @@ body {
     justify-self: center;
 }
 
-#project-header {
+.project-section {
     font-size: 1.4rem;
     font-weight: bold;
     text-decoration-line: underline;
     padding-bottom: 15px;
 }
 
+.project-text {
+    text-decoration: none;
+    font-size: 1.3rem;
+}
+
 #new-project {
-    display: grid;
+    /* display: grid;
     grid-template-columns: 30px 4fr;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     background-color: rgba(128, 128, 128, 0.491);
     border-radius: 10px;
     width:max-content;
     gap: 10px;
     padding: 7px;
-    margin-top: 20px;
+    margin-top: 20px; */
+}
+
+#new-project:hover {
+    cursor: pointer;
 }
 
 .project-container {
@@ -72,6 +81,69 @@ body {
     align-items: center;
     padding-left: 20px;
     font-size: 1.2rem;
+}
+
+#projects-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+
+#add-project {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+    background-color: rgb(39, 63, 54);
+    border: none;
+}
+
+#add-project:hover {
+    cursor: pointer;
+}
+
+#new-project-form {
+    display: none;
+    margin-top: 20px;
+}
+
+#new-project-entry {
+    font-size: 1rem;
+    width: 140px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+#new-project-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin: 10px 25px;
+    
+}
+
+#add-new-project {
+    border: 2px solid rgb(0, 197, 0);
+    background-color: rgba(131, 255, 127, 0.3);
+}
+
+#cancel-new-project {
+    border: 2px solid rgb(255, 91, 91);
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+#add-new-project,
+#cancel-new-project {
+    border-radius: 10px;
+    padding: 5px;
+
+}
+
+#add-new-project:hover,
+#cancel-new-project:hover {
+    cursor: pointer;
 }
 
 #new-task-container {
@@ -127,6 +199,15 @@ body {
 
 .form-input {
     grid-column: 2;
+    width: 225px;
+}
+
+#date-input {
+    width: 245px;
+}
+
+#priority-input {
+    width: 250px;
 }
 
 .title {

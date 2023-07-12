@@ -27,16 +27,30 @@
                     </div>
                 </div>
                 <div class="sidebar-section" id="bottom-sidebar">
-                    <div id="project-header">Projects</div>
-                    <div class="project-container">
-                        <div class="nav-text">Example</div>
-                        <img class="delete" width="20" height="20" src="./images/trash.png" alt="trash" >
+                    <div id="project-section-container">
+                        <div id="projects-header">
+                            <div class="project-section">Projects</div>
+                            <img class="nav-icon" id="new-project" width="25" height="25" src="./images/plus.png" alt="plus">
+                        </div>
+                        <div class="project-container">
+                            <div class="project-text">Example</div>
+                            <img class="delete" width="20" height="20" src="./images/trash.png" alt="trash" >
+                        </div>
                     </div>
-                    <div id="new-project">
+                    <div id="project-form-container">
+                        <form id="new-project-form">
+                            <input type="text" placeholder="Enter new project" id="new-project-entry" maxlength="15">
+                            <div id="new-project-nav">
+                                <div id="add-new-project">Add</div>
+                                <div id="cancel-new-project">Cancel</div>
+                            </div>
+                            <!-- <img class="nav-icon" width="25" height="25" src="./images/plus.png" alt="plus"> -->
+                        </form>
+                    </div>
+                    <!-- <div id="new-project">
                         <img class="nav-icon" width="30" height="30" src="./images/plus.png" alt="plus">
                         <div class="nav-text">New Project</div>
-                    </div>
-
+                    </div> -->
                 </div>
             </div>
             <div id="main-body">
@@ -53,15 +67,15 @@
                         </div>
                         <div class="description form-item">
                             <label for="description">Description:</label>
-                            <input type="text" name="description" id="large-text-input">
+                            <input type="text" name="description" id="large-text-input" class="form-input">
                         </div>
                         <div class="date form-item">
-                            <label for="date">Date placeholder</label>
-                            <input type="text" name="date">
+                            <label for="date">Due Date:</label>
+                            <input type="date" name="date" class="form-input" id="date-input">
                         </div>
                         <div class="priority form-item">
                             <label for="priority">Priority: </label>
-                            <select name="priority" id="">
+                            <select name="priority" class="form-input" id="priority-input">
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
