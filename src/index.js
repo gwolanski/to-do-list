@@ -12,6 +12,7 @@ newProjectButton.addEventListener("click", (e) => {
 let newProjectCancel = document.getElementById("cancel-new-project");
 newProjectCancel.addEventListener("click", (e) => {
     document.getElementById("new-project-form").style.display = "none";
+    removeError();
 })
 
 //When the "add" button is pressed for a new project, 
@@ -24,12 +25,30 @@ newProjectCancel.addEventListener("click", (e) => {
 let newProjectSubmit = document.getElementById("add-new-project");
 newProjectSubmit.addEventListener("click", (e) => {
     let newProject = document.getElementById("new-project-entry").value;
+    let projectInput = document.getElementById("new-project-entry");
     let projectForm = document.getElementById("new-project-form");
-    projectList.push(newProject);
-    projectForm.reset();
-    displayProjects();
+
+    if (newProject != "") {
+        removeError();
+        projectList.push(newProject);
+        projectForm.reset();
+        displayProjects();
+    } else {
+        let emptyProjectError = document.createElement("div");
+        emptyProjectError.id = "project-error";
+        emptyProjectError.innerHTML = "This field is required*";
+        projectInput.parentNode.insertBefore(emptyProjectError, projectInput.nextSibling);
+    }
+
 
 })
+
+function removeError(){
+    let errorElement = document.getElementById("project-error");
+    if (errorElement) {
+        errorElement.remove();
+    }
+}
 
 function displayProjects() {
     let projects = document.getElementById("projects");
