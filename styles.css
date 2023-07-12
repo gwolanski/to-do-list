@@ -154,6 +154,11 @@ body {
     color: grey
 }
 
+.delete {
+    width: 20px;
+    height: 20px;
+}
+
 #form-container {
     display: none;
     position: fixed;
