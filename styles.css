@@ -159,6 +159,12 @@ body {
     height: 20px;
 }
 
+#project-error {
+    color: rgb(255, 69, 69);
+    margin-left: 9px;
+    padding: 5px;
+}
+
 #form-container {
     display: none;
     position: fixed;
