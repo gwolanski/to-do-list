@@ -1,11 +1,10 @@
 import taskManager from "../dist/todo";
 
 let taskList = [];
+let projectList = ["Example"];
 
 let newProjectButton = document.getElementById("new-project");
 newProjectButton.addEventListener("click", (e) => {
-    console.log("new project");
-
     // let projectSection = document.getElementById("project-section-container");
     document.getElementById("new-project-form").style.display = "block";
 })
@@ -23,6 +22,35 @@ newProjectCancel.addEventListener("click", (e) => {
 //when project deleted, it is removed from array and other item indexes change accoridngly
 
 let newProjectSubmit = document.getElementById("add-new-project");
+newProjectSubmit.addEventListener("click", (e) => {
+    let newProject = document.getElementById("new-project-entry").value;
+    let projectForm = document.getElementById("new-project-form");
+    projectList.push(newProject);
+    projectForm.reset();
+    displayProjects();
+
+})
+
+function displayProjects() {
+    let projects = document.getElementById("projects");
+    projects.innerHTML = "";
+
+    for (let i = 0; i < projectList.length; i++) {
+        let projectContainer = document.createElement("div");
+        projectContainer.classList.add("project-container");
+        projects.appendChild(projectContainer);
+
+        let projectText = document.createElement("div");
+        projectText.classList.add("project-text");
+        projectText.innerHTML = projectList[i];
+        projectContainer.appendChild(projectText);
+
+        let deleteBtn = document.createElement("img");
+        deleteBtn.classList.add("delete");
+        deleteBtn.src = "./images/trash.png";
+        projectContainer.appendChild(deleteBtn);
+    }
+} 
 
 let newTaskButton = document.getElementById("new-task-container");
 newTaskButton.addEventListener("click", (e) => {
