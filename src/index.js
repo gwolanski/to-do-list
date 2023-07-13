@@ -5,7 +5,6 @@ let projectList = ["Example"];
 
 let newProjectButton = document.getElementById("new-project");
 newProjectButton.addEventListener("click", (e) => {
-    // let projectSection = document.getElementById("project-section-container");
     document.getElementById("new-project-form").style.display = "block";
 })
 
@@ -15,12 +14,8 @@ newProjectCancel.addEventListener("click", (e) => {
     removeError();
 })
 
-//When the "add" button is pressed for a new project, 
-//the value that is in the form is appended to the end of the project list
-//if nothing is typed in, nothing happens
-//have an array that contains the projects.
-//create a for loop that cycles through the array and draws it to the project list
 //when project deleted, it is removed from array and other item indexes change accoridngly
+
 
 let newProjectSubmit = document.getElementById("add-new-project");
 newProjectSubmit.addEventListener("click", (e) => {
@@ -54,7 +49,7 @@ function displayProjects() {
     let projects = document.getElementById("projects");
     projects.innerHTML = "";
 
-    for (let i = 0; i < projectList.length; i++) {
+    for (let i = 0; i < projectList.length; i++) {        
         let projectContainer = document.createElement("div");
         projectContainer.classList.add("project-container");
         projects.appendChild(projectContainer);
@@ -67,9 +62,19 @@ function displayProjects() {
         let deleteBtn = document.createElement("img");
         deleteBtn.classList.add("delete");
         deleteBtn.src = "./images/trash.png";
+        deleteBtn.addEventListener("click", (e) => {
+            deleteProject(i);
+            console.log("projectList after delete: " + projectList);
+        })
+
         projectContainer.appendChild(deleteBtn);
     }
-} 
+}
+
+function deleteProject(index) {
+    projectList.splice(index, 1);
+    displayProjects();
+}
 
 let newTaskButton = document.getElementById("new-task-container");
 newTaskButton.addEventListener("click", (e) => {
