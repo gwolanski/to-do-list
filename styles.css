@@ -58,19 +58,6 @@ body {
     font-size: 1.3rem;
 }
 
-#new-project {
-    /* display: grid;
-    grid-template-columns: 30px 4fr;
-    align-items: center;
-    font-size: 1.1rem;
-    background-color: rgba(128, 128, 128, 0.491);
-    border-radius: 10px;
-    width:max-content;
-    gap: 10px;
-    padding: 7px;
-    margin-top: 20px; */
-}
-
 #new-project:hover {
     cursor: pointer;
 }
@@ -159,8 +146,12 @@ body {
     height: 20px;
 }
 
+.delete:hover {
+    cursor: pointer;
+}
+
 #project-error {
-    color: rgb(255, 69, 69);
+    color: rgb(255, 118, 118);
     margin-left: 9px;
     padding: 5px;
 }
@@ -187,7 +178,7 @@ body {
     margin: 300px auto;
     justify-self: center;
     display: grid;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-template-columns: 1fr 20px;
     gap: 10px;
 }
@@ -233,12 +224,16 @@ body {
     grid-row: 4;
 }
 
-.priority {
+.task-project {
     grid-row: 5;
 }
 
-#submit-button {
+.priority {
     grid-row: 6;
+}
+
+#submit-button {
+    grid-row: 7;
 }
 
 #close-button {
