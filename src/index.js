@@ -2,6 +2,8 @@ import taskManager from "../dist/todo";
 
 let taskList = [];
 let projectList = ["Example"];
+let taskFormContainer = document.getElementById("form-container");
+let taskForm = document.getElementById("task-form");
 
 let newProjectButton = document.getElementById("new-project");
 newProjectButton.addEventListener("click", (e) => {
@@ -13,9 +15,6 @@ newProjectCancel.addEventListener("click", (e) => {
     document.getElementById("new-project-form").style.display = "none";
     removeError();
 })
-
-//when project deleted, it is removed from array and other item indexes change accoridngly
-
 
 let newProjectSubmit = document.getElementById("add-new-project");
 newProjectSubmit.addEventListener("click", (e) => {
@@ -78,31 +77,53 @@ function deleteProject(index) {
 
 let newTaskButton = document.getElementById("new-task-container");
 newTaskButton.addEventListener("click", (e) => {
-    document.getElementById("form-container").style.display= "block";
+    taskFormContainer.style.display= "block";
 })
 
 let closeButton = document.getElementById("close-button");
 closeButton.addEventListener("click", (e) => {
-    document.getElementById("form-container").style.display= "none";
+   closeTaskForm();
 })
 
-let title = document.getElementById("title");
-let description = document.getElementById("description");
-let dueDate= document.getElementById("date");
-let priority = document.getElementById("priority");
+let submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    submit();
+})
 
-//Take info submitted in the form and create an object.
-//Push object to an array
+function submit() {
+    let title = document.getElementById("title-input");
+    console.log("title: " + title);
+    let description = document.getElementById("description-input").value;
+    let dueDate= document.getElementById("date-input").value;
+    let priority = document.getElementById("priority-input").value;
+    let projectSelection = document.getElementById("project-selection").value;
+
+    console.log("title: " + title);
+
+    let task = new NewTask(title, description, dueDate, priority, projectSelection);
+
+    closeTaskForm();
+    taskForm.reset();
+}
+
+function closeTaskForm() {
+    taskFormContainer.style.display= "none"
+}
 
 
 class NewTask {
-    constructor(title, description, date, priority) {
-        this.title = title,
-        this.description = description,
-        this.date = date,
-        this.priority = priority
+    constructor(title, description, dueDate, priority, projectSelection) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.projectSelection = projectSelection
     }
 }
+
+//Take info submitted in the form and create an object.
+//Push object to an array
 
 function createTask(task) {
     let taskContainer = document.createElement("div");
