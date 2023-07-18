@@ -246,7 +246,7 @@ body {
     cursor: pointer;
 }
 
-#small-text-input{
+.small-text-input{
     height: 20%;
     align-self: center;
     font-size: 1rem;
@@ -255,7 +255,7 @@ body {
     max-width: 100%;
 }
 
-#large-text-input {
+.large-text-input {
     height: 20%;
     align-self: center;
     font-size: 1rem;
