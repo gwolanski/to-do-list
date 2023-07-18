@@ -75,9 +75,12 @@ function deleteProject(index) {
     displayProjects();
 }
 
+
+
 let newTaskButton = document.getElementById("new-task-container");
 newTaskButton.addEventListener("click", (e) => {
     taskFormContainer.style.display= "block";
+    populateProjectDropdown();
 })
 
 let closeButton = document.getElementById("close-button");
@@ -109,6 +112,18 @@ function submit() {
 
 function closeTaskForm() {
     taskFormContainer.style.display= "none"
+}
+
+function populateProjectDropdown() {
+    let projectDropdown = document.getElementById("project-selection");
+
+    projectDropdown.innerHTML = "";
+    
+    for (let i = 0; i < projectList.length; i++) {
+        let projectOption = document.createElement("option");
+        projectOption.innerHTML = projectList[i];
+        projectDropdown.appendChild(projectOption);
+    }
 }
 
 
