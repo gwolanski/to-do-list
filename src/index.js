@@ -117,6 +117,10 @@ function populateProjectDropdown() {
     let projectDropdown = document.getElementById("project-selection");
 
     projectDropdown.innerHTML = "";
+
+    let blankProject = document.createElement("option");
+    blankProject.innerHTML = "";
+    projectDropdown.appendChild(blankProject);
     
     for (let i = 0; i < projectList.length; i++) {
         let projectOption = document.createElement("option");
@@ -181,8 +185,6 @@ function displayTasks() {
         let taskPriority = document.createElement("div");
         taskPriority.classList.add("task-priority");
         taskPriority.innerHTML = taskList[i].priority;
-
-        console.log("taskList[0]:" + taskList[0].title);
 
         let deleteTaskBtn = document.createElement("img");
         deleteTaskBtn.classList.add("delete");
