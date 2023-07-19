@@ -58,15 +58,13 @@ function displayProjects() {
         projectText.innerHTML = projectList[i];
         projectContainer.appendChild(projectText);
 
-        let deleteBtn = document.createElement("img");
-        deleteBtn.classList.add("delete");
-        deleteBtn.src = "./images/trash.png";
-        deleteBtn.addEventListener("click", (e) => {
+        let deleteProjectBtn = document.createElement("img");
+        deleteProjectBtn.classList.add("delete");
+        deleteProjectBtn.src = "./images/trash.png";
+        deleteProjectBtn.addEventListener("click", (e) => {
             deleteProject(i);
-            console.log("projectList after delete: " + projectList);
         })
-
-        projectContainer.appendChild(deleteBtn);
+        projectContainer.appendChild(deleteProjectBtn);
     }
 }
 
@@ -95,16 +93,17 @@ submitButton.addEventListener("click", (e) => {
 })
 
 function submit() {
-    let title = document.getElementById("title-input");
-    console.log("title: " + title);
+    let title = document.getElementById("title-input").value;
     let description = document.getElementById("description-input").value;
     let dueDate= document.getElementById("date-input").value;
     let priority = document.getElementById("priority-input").value;
     let projectSelection = document.getElementById("project-selection").value;
 
-    console.log("title: " + title);
 
-    let task = new NewTask(title, description, dueDate, priority, projectSelection);
+    let task = new Task(title, description, dueDate, priority, projectSelection);
+    taskList.push(task);
+
+    displayTasks();
 
     closeTaskForm();
     taskForm.reset();
@@ -127,7 +126,7 @@ function populateProjectDropdown() {
 }
 
 
-class NewTask {
+class Task {
     constructor(title, description, dueDate, priority, projectSelection) {
         this.title = title;
         this.description = description;
@@ -140,25 +139,73 @@ class NewTask {
 //Take info submitted in the form and create an object.
 //Push object to an array
 
-function createTask(task) {
-    let taskContainer = document.createElement("div");
-    taskContainer.classList.add("task-container");
+function displayTasks() {
+    let tasks = document.getElementById("tasks");
+    tasks.innerHTML = "";
 
-    let taskTitle = document.createElement("div");
-    taskTitle.classList.add("task-title");
-    taskTitle.innerHTML = task.title;
+    for (let i = 0; i < taskList.length; i++) {
+        let taskContainer = document.createElement("div");
+        taskContainer.classList.add("task-container");
 
-    let taskDescription = document.createElement("div");
-    taskDescription.classList.add("task-description");
-    taskDescription.innerHTML = task.description;
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.addEventListener("change", function() {
+            if (this.checked) {
+                //add code here to change class for styling - grey text, strikethrough
+            } else {
+                //add code here to change class back to normal
+            }
+        })
 
-    let taskPriority = document.createElement("div");
-    taskPriority.classList.add("task-priority");
-    taskPriority.innerHTML = task.priority;
 
-    taskContainer.appendChild("taskTitle");
-    taskContainer.appendChild("taskDescription");
-    taskContainer.appendChild("taskPriority");
+        let taskTitle = document.createElement("div");
+        taskTitle.classList.add("task-title");
+        taskTitle.innerHTML = taskList[i].title;
 
-    return taskContainer;
+        let taskDescription = document.createElement("div");
+        taskDescription.classList.add("task-description");
+        taskDescription.innerHTML = taskList[i].description;
+
+        let taskDueDate = document.createElement("div");
+        taskDueDate.classList.add("task-due-date");
+        taskDueDate.innerHTML = taskList[i].dueDate;
+
+        let taskProject = document.createElement("div");
+        taskProject.classList.add("task-project");
+        if (taskList[i].project == "") {
+            taskProject.innerHTML = "";
+        } else {
+            taskProject.innerHTML = taskList[i].project;
+        }
+
+        let taskPriority = document.createElement("div");
+        taskPriority.classList.add("task-priority");
+        taskPriority.innerHTML = taskList[i].priority;
+
+        console.log("taskList[0]:" + taskList[0].title);
+
+        let deleteTaskBtn = document.createElement("img");
+        deleteTaskBtn.classList.add("delete");
+        deleteTaskBtn.src = "./images/trash-black.png";
+        deleteTaskBtn.addEventListener("click", (e) => {
+            deleteTask(i);
+        })
+
+        tasks.appendChild(taskContainer);
+
+        taskContainer.appendChild(checkbox);
+        taskContainer.appendChild(taskTitle);
+        // taskContainer.appendChild(taskDescription);
+        taskContainer.appendChild(taskDueDate);
+        // taskContainer.appendChild(taskProject);
+        taskContainer.appendChild(taskPriority);
+        taskContainer.appendChild(deleteTaskBtn);
+        
+    }
+    
+}
+
+function deleteTask(index) {
+    taskList.splice(index, 1);
+    displayTasks();
 }

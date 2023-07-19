@@ -264,3 +264,19 @@ body {
     max-width: 100%;
 }
 
+.task-headers {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+    gap: 500px;
+    margin: 30px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.task-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
