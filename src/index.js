@@ -59,7 +59,7 @@ function displayProjects() {
         projectContainer.appendChild(projectText);
 
         let deleteProjectBtn = document.createElement("img");
-        deleteProjectBtn.classList.add("delete");
+        deleteProjectBtn.classList.add("delete-task");
         deleteProjectBtn.src = "./images/trash.png";
         deleteProjectBtn.addEventListener("click", (e) => {
             deleteProject(i);
@@ -89,8 +89,20 @@ closeButton.addEventListener("click", (e) => {
 let submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", (e) => {
     e.preventDefault();
-    submit();
+    validateForm();
+    // submit();
 })
+
+function validateForm() {
+    let title = document.getElementById("title-input").value;
+
+    if (title == "") {
+        alert("Title is required");
+        return false;
+    } else {
+        submit();
+    }
+}
 
 function submit() {
     let title = document.getElementById("title-input").value;
@@ -98,7 +110,6 @@ function submit() {
     let dueDate= document.getElementById("date-input").value;
     let priority = document.getElementById("priority-input").value;
     let projectSelection = document.getElementById("project-selection").value;
-
 
     let task = new Task(title, description, dueDate, priority, projectSelection);
     taskList.push(task);
@@ -119,7 +130,7 @@ function populateProjectDropdown() {
     projectDropdown.innerHTML = "";
 
     let blankProject = document.createElement("option");
-    blankProject.innerHTML = "";
+    blankProject.innerHTML = " ";
     projectDropdown.appendChild(blankProject);
     
     for (let i = 0; i < projectList.length; i++) {
@@ -136,12 +147,9 @@ class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.projectSelection = projectSelection
+        this.projectSelection = projectSelection;
     }
 }
-
-//Take info submitted in the form and create an object.
-//Push object to an array
 
 function displayTasks() {
     let tasks = document.getElementById("tasks");
@@ -161,6 +169,10 @@ function displayTasks() {
             }
         })
 
+        let taskDetails = document.createElement('div');
+        taskDetails.classList.add("task-details");
+        taskDetails.classList.add("expandable");
+
 
         let taskTitle = document.createElement("div");
         taskTitle.classList.add("task-title");
@@ -168,7 +180,7 @@ function displayTasks() {
 
         let taskDescription = document.createElement("div");
         taskDescription.classList.add("task-description");
-        taskDescription.innerHTML = taskList[i].description;
+        taskDescription.innerHTML = `<b>Description:</b> ${taskList[i].description}`;
 
         let taskDueDate = document.createElement("div");
         taskDueDate.classList.add("task-due-date");
@@ -176,15 +188,18 @@ function displayTasks() {
 
         let taskProject = document.createElement("div");
         taskProject.classList.add("task-project");
-        if (taskList[i].project == "") {
-            taskProject.innerHTML = "";
-        } else {
-            taskProject.innerHTML = taskList[i].project;
-        }
+        taskProject.innerHTML = `<b>Project:</b> ${taskList[i].projectSelection}`
 
         let taskPriority = document.createElement("div");
         taskPriority.classList.add("task-priority");
-        taskPriority.innerHTML = taskList[i].priority;
+        taskPriority.innerHTML = `<b>Priority:</b> ${taskList[i].priority}`;
+
+        let expandTaskBtn = document.createElement("img");
+        expandTaskBtn.classList.add("expand-button");
+        expandTaskBtn.src = "./images/expand-arrow.png";
+        expandTaskBtn.addEventListener("click", (e) => {
+            taskDetails.classList.toggle("expanded");
+        })
 
         let deleteTaskBtn = document.createElement("img");
         deleteTaskBtn.classList.add("delete");
@@ -196,12 +211,17 @@ function displayTasks() {
         tasks.appendChild(taskContainer);
 
         taskContainer.appendChild(checkbox);
-        taskContainer.appendChild(taskTitle);
-        // taskContainer.appendChild(taskDescription);
-        taskContainer.appendChild(taskDueDate);
-        // taskContainer.appendChild(taskProject);
-        taskContainer.appendChild(taskPriority);
-        taskContainer.appendChild(deleteTaskBtn);
+        taskContainer.appendChild(taskDetails);
+        taskDetails.appendChild(taskTitle);
+        taskDetails.appendChild(taskDueDate);
+        taskDetails.appendChild(taskPriority);
+        taskDetails.appendChild(expandTaskBtn);
+        taskDetails.appendChild(deleteTaskBtn);
+        if (taskList[i].description) {
+            taskDetails.appendChild(taskDescription);
+        }
+        taskDetails.appendChild(taskProject);
+        taskDetails.appendChild(taskPriority);
         
     }
     
