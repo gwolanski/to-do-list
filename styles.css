@@ -337,3 +337,8 @@ body {
 .delete-task {
     grid-column: 9;
 }
+
+.checked {
+    color: grey;
+    text-decoration: line-through;
+}

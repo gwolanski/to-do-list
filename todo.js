@@ -7,8 +7,9 @@ export default function submitTask() {
     let dueDate= document.getElementById("date-input").value;
     let priority = document.getElementById("priority-input").value;
     let projectSelection = document.getElementById("project-selection").value;
+    let taskComplete = false;
 
-    let task = new Task(title, description, dueDate, priority, projectSelection);
+    let task = new Task(title, description, dueDate, priority, projectSelection, taskComplete);
     taskList.push(task);
 
     displayTasks();
@@ -18,12 +19,13 @@ export default function submitTask() {
 }
 
 class Task {
-    constructor(title, description, dueDate, priority, projectSelection) {
+    constructor(title, description, dueDate, priority, projectSelection, taskComplete) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.projectSelection = projectSelection;
+        this.taskComplete = taskComplete;
     }
 }
 
@@ -39,11 +41,19 @@ function displayTasks() {
         checkbox.type = "checkbox";
         checkbox.addEventListener("change", function() {
             if (this.checked) {
-                //add code here to change class for styling - grey text, strikethrough
+                taskContainer.classList.add("checked");
+                taskList[i].taskComplete = true;
             } else {
-                //add code here to change class back to normal
+                taskContainer.classList.remove("checked");
+                taskList[i].taskComplete = false;
             }
         })
+
+        if (taskList[i].taskComplete == true) {
+            taskContainer.classList.add("checked");
+        } else {
+            taskContainer.classList.remove("checked");
+        }
 
         let taskDetails = document.createElement('div');
         taskDetails.classList.add("task-details");
