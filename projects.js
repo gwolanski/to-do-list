@@ -41,6 +41,20 @@ function displayProjects() {
         projectText.innerHTML = projectList[i];
         projectContainer.appendChild(projectText);
 
+        projectText.addEventListener("click", (e) => {
+            ///When you click on a project, the main part of the page changes so only the tasks related to that project are shown
+            //any other task should be "hidden"
+       
+            let selectionHeaderContainer = document.getElementById("selection-header-container");
+
+            selectionHeaderContainer.innerHTML = "";
+            let projectHeader = document.createElement('div');
+            projectHeader.innerHTML = projectList[i];
+            projectHeader.classList.add("selection-header");
+            selectionHeaderContainer.appendChild(projectHeader);
+            
+        })
+
         let deleteProjectBtn = document.createElement("img");
         deleteProjectBtn.classList.add("delete");
         deleteProjectBtn.src = "./images/trash.png";
