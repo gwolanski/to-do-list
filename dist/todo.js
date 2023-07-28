@@ -120,3 +120,7 @@ export function closeTaskForm() {
     let taskFormContainer = document.getElementById("form-container");
     taskFormContainer.style.display= "none"
 }
+
+function displayProjectTasks() {
+    //check 
+}
