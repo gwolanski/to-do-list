@@ -1,4 +1,5 @@
-let taskList = [];
+export let taskList = [];
+export let filteredTasks = [];
 let taskForm = document.getElementById("task-form");
 
 export default function submitTask() {
@@ -12,7 +13,7 @@ export default function submitTask() {
     let task = new Task(title, description, dueDate, priority, projectSelection, taskComplete);
     taskList.push(task);
 
-    displayTasks();
+    displayAllTasks();
 
     closeTaskForm();
     taskForm.reset();
@@ -29,86 +30,97 @@ class Task {
     }
 }
 
-function displayTasks() {
+export function displayAllTasks() {
     let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
 
     for (let i = 0; i < taskList.length; i++) {
-        let taskContainer = document.createElement("div");
-        taskContainer.classList.add("task-container");
-
-        let checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.addEventListener("change", function() {
-            if (this.checked) {
-                taskContainer.classList.add("checked");
-                taskList[i].taskComplete = true;
-            } else {
-                taskContainer.classList.remove("checked");
-                taskList[i].taskComplete = false;
-            }
-        })
-
-        if (taskList[i].taskComplete == true) {
-            taskContainer.classList.add("checked");
-        } else {
-            taskContainer.classList.remove("checked");
-        }
-
-        let taskDetails = document.createElement('div');
-        taskDetails.classList.add("task-details");
-        taskDetails.classList.add("expandable");
-
-
-        let taskTitle = document.createElement("div");
-        taskTitle.classList.add("task-title");
-        taskTitle.innerHTML = taskList[i].title;
-
-        let taskDescription = document.createElement("div");
-        taskDescription.classList.add("task-description");
-        taskDescription.innerHTML = `<b>Description:</b> ${taskList[i].description}`;
-
-        let taskDueDate = document.createElement("div");
-        taskDueDate.classList.add("task-due-date");
-        taskDueDate.innerHTML = taskList[i].dueDate;
-
-        let taskProject = document.createElement("div");
-        taskProject.classList.add("task-project");
-        taskProject.innerHTML = `<b>Project:</b> ${taskList[i].projectSelection}`
-
-        let taskPriority = document.createElement("div");
-        taskPriority.classList.add("task-priority");
-        taskPriority.innerHTML = `<b>Priority:</b> ${taskList[i].priority}`;
-
-        let expandTaskBtn = document.createElement("img");
-        expandTaskBtn.classList.add("expand-button");
-        expandTaskBtn.src = "./images/expand-arrow.png";
-        expandTaskBtn.addEventListener("click", (e) => {
-            taskDetails.classList.toggle("expanded");
-        })
-
-        let deleteTaskBtn = document.createElement("img");
-        deleteTaskBtn.classList.add("delete");
-        deleteTaskBtn.src = "./images/trash-black.png";
-        deleteTaskBtn.addEventListener("click", (e) => {
-            deleteTask(i);
-        })
-
-        tasks.appendChild(taskContainer);
-
-        taskContainer.appendChild(checkbox);
-        taskContainer.appendChild(taskDetails);
-        taskDetails.appendChild(taskTitle);
-        taskDetails.appendChild(taskDueDate);
-        taskDetails.appendChild(taskPriority);
-        taskDetails.appendChild(expandTaskBtn);
-        taskDetails.appendChild(deleteTaskBtn);
-        taskDetails.appendChild(taskDescription);
-        taskDetails.appendChild(taskProject);
-        taskDetails.appendChild(taskPriority);
-        
+        displayTasks(taskList[i]);        
     }
     
+    return tasks;
+}
+
+export function displayFilteredTasks() {
+    tasks.innerHTML = "";
+    for (let i = 0; i < filteredTasks.length; i++) {
+        displayTasks(filteredTasks[i]);
+    }
+}
+
+export function displayTasks(task) {
+    let taskContainer = document.createElement("div");
+    taskContainer.classList.add("task-container");
+
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.addEventListener("change", function() {
+        if (this.checked) {
+            taskContainer.classList.add("checked");
+            task.taskComplete = true;
+        } else {
+            taskContainer.classList.remove("checked");
+            task.taskComplete = false;
+        }
+    })
+
+    if (task.taskComplete == true) {
+        taskContainer.classList.add("checked");
+    } else {
+        taskContainer.classList.remove("checked");
+    }
+
+    let taskDetails = document.createElement('div');
+    taskDetails.classList.add("task-details");
+    taskDetails.classList.add("expandable");
+
+
+    let taskTitle = document.createElement("div");
+    taskTitle.classList.add("task-title");
+    taskTitle.innerHTML = task.title;
+
+    let taskDescription = document.createElement("div");
+    taskDescription.classList.add("task-description");
+    taskDescription.innerHTML = `<b>Description:</b> ${task.description}`;
+
+    let taskDueDate = document.createElement("div");
+    taskDueDate.classList.add("task-due-date");
+    taskDueDate.innerHTML = task.dueDate;
+
+    let taskProject = document.createElement("div");
+    taskProject.classList.add("task-project");
+    taskProject.innerHTML = `<b>Project:</b> ${task.projectSelection}`
+
+    let taskPriority = document.createElement("div");
+    taskPriority.classList.add("task-priority");
+    taskPriority.innerHTML = `<b>Priority:</b> ${task.priority}`;
+
+    let expandTaskBtn = document.createElement("img");
+    expandTaskBtn.classList.add("expand-button");
+    expandTaskBtn.src = "./images/expand-arrow.png";
+    expandTaskBtn.addEventListener("click", (e) => {
+        taskDetails.classList.toggle("expanded");
+    })
+
+    let deleteTaskBtn = document.createElement("img");
+    deleteTaskBtn.classList.add("delete");
+    deleteTaskBtn.src = "./images/trash-black.png";
+    deleteTaskBtn.addEventListener("click", (e) => {
+        deleteTask(i);
+    })
+
+    tasks.appendChild(taskContainer);
+
+    taskContainer.appendChild(checkbox);
+    taskContainer.appendChild(taskDetails);
+    taskDetails.appendChild(taskTitle);
+    taskDetails.appendChild(taskDueDate);
+    taskDetails.appendChild(taskPriority);
+    taskDetails.appendChild(expandTaskBtn);
+    taskDetails.appendChild(deleteTaskBtn);
+    taskDetails.appendChild(taskDescription);
+    taskDetails.appendChild(taskProject);
+    taskDetails.appendChild(taskPriority);
 }
 
 function deleteTask(index) {
@@ -119,8 +131,4 @@ function deleteTask(index) {
 export function closeTaskForm() {
     let taskFormContainer = document.getElementById("form-container");
     taskFormContainer.style.display= "none"
-}
-
-function displayProjectTasks() {
-    //check 
 }

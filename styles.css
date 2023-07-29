@@ -42,6 +42,10 @@ body {
     padding-bottom: 15px;
 }
 
+.nav-container:hover {
+    cursor: pointer;
+}
+
 .nav-icon {
     justify-self: center;
 }
@@ -274,7 +278,7 @@ body {
     max-width: 100%;
 }
 
-.selection-header {
+#selection-header {
     font-size: 1.4rem;
     font-weight: bold;
     margin: 20px;
