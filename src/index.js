@@ -1,7 +1,9 @@
 import submitTask from "../dist/todo";
-import { closeTaskForm } from "../dist/todo";
+import { closeTaskForm, displayTasks, taskList, displayFilteredTasks, filteredTasks, displayAllTasks } from "../dist/todo";
 import submitNewProject from "../dist/projects";
-import { projectList, removeError } from "../dist/projects";
+import { projectList, removeError, selectionHeaderContainer } from "../dist/projects";
+
+let tasksFiltered = false;
 
 let taskFormContainer = document.getElementById("form-container");
 
@@ -62,3 +64,26 @@ function populateProjectDropdown() {
         projectDropdown.appendChild(projectOption);
     }
 }
+
+let allTasksButton = document.getElementById("all-tasks");
+allTasksButton.addEventListener("click", (e) => {
+    tasksFiltered = false;
+    selectionHeaderContainer.innerHTML = "";
+    displayAllTasks();
+})
+
+
+let projectSection = document.getElementById("projects");
+projectSection.addEventListener("click", (e) => {
+    tasksFiltered = true;
+    let projectHeader = document.getElementById("selection-header").innerHTML;
+    filteredTasks = [];
+    taskList.forEach(task => {
+        if (task.projectSelection == projectHeader) {
+            filteredTasks.push(task);
+        }
+    });
+    displayFilteredTasks();
+})
+
+
