@@ -35,7 +35,7 @@ export function displayAllTasks() {
     tasks.innerHTML = "";
 
     for (let i = 0; i < taskList.length; i++) {
-        displayTasks(taskList[i]);        
+        displayTask(taskList[i]);        
     }
     
     return tasks;
@@ -44,11 +44,11 @@ export function displayAllTasks() {
 export function displayFilteredTasks() {
     tasks.innerHTML = "";
     for (let i = 0; i < filteredTasks.length; i++) {
-        displayTasks(filteredTasks[i]);
+        displayTask(filteredTasks[i]);
     }
 }
 
-export function displayTasks(task) {
+function displayTask(task) {
     let taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
 
@@ -102,11 +102,18 @@ export function displayTasks(task) {
         taskDetails.classList.toggle("expanded");
     })
 
+    let editTaskBtn = document.createElement("img");
+    editTaskBtn.classList.add("edit");
+    editTaskBtn.src = "./images/edit.png";
+    editTaskBtn.addEventListener("click", (e) => {
+
+    })
+
     let deleteTaskBtn = document.createElement("img");
     deleteTaskBtn.classList.add("delete");
     deleteTaskBtn.src = "./images/trash-black.png";
     deleteTaskBtn.addEventListener("click", (e) => {
-        deleteTask(i);
+        deleteTask(task);
     })
 
     tasks.appendChild(taskContainer);
@@ -117,15 +124,17 @@ export function displayTasks(task) {
     taskDetails.appendChild(taskDueDate);
     taskDetails.appendChild(taskPriority);
     taskDetails.appendChild(expandTaskBtn);
+    taskDetails.appendChild(editTaskBtn);
     taskDetails.appendChild(deleteTaskBtn);
     taskDetails.appendChild(taskDescription);
     taskDetails.appendChild(taskProject);
     taskDetails.appendChild(taskPriority);
 }
 
-function deleteTask(index) {
-    taskList.splice(index, 1);
-    displayTasks();
+function deleteTask(task) {
+    const index = taskList.indexOf(task);
+        taskList.splice(index, 1);
+        displayAllTasks(); 
 }
 
 export function closeTaskForm() {
