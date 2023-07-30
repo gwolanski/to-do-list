@@ -1,5 +1,5 @@
 import submitTask from "../dist/todo";
-import { closeTaskForm, displayTasks, taskList, displayFilteredTasks, filteredTasks, displayAllTasks } from "../dist/todo";
+import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks } from "../dist/todo";
 import submitNewProject from "../dist/projects";
 import { projectList, removeError, selectionHeaderContainer } from "../dist/projects";
 
