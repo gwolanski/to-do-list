@@ -1,5 +1,5 @@
 import submitTask from "../dist/todo";
-import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks } from "../dist/todo";
+import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm } from "../dist/todo";
 import submitNewProject from "../dist/projects";
 import { projectList, removeError, selectionHeaderContainer } from "../dist/projects";
 
@@ -30,6 +30,11 @@ newTaskButton.addEventListener("click", (e) => {
 let closeButton = document.getElementById("close-button");
 closeButton.addEventListener("click", (e) => {
    closeTaskForm();
+})
+
+let closeEditsButton = document.getElementById("close-edits-button");
+closeEditsButton.addEventListener("click", (e) => {
+    closeEditForm();
 })
 
 let submitButton = document.getElementById("submit-button");
