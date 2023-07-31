@@ -56,7 +56,7 @@
                 </div>
                 <div id="form-container">
                     <form id="task-form" required>
-                        <div id="form-title">New Task</div>
+                        <div class="form-title">New Task</div>
                         <div class="title-form form-item">
                             <label for="title" class="form-label">Title: *</label>
                             <input type="text" name="title" id="title-input" class="form-input small-text-input" required>
@@ -86,16 +86,46 @@
                         <input type="submit" value="Submit" id="submit-button">
                         <button id="close-button">X</button>
                     </form>
-                    
+                </div>
+                <div id="edit-form-container">
+                    <form id="edit-task-form" required>
+                        <div class="form-title">Edit Task</div>
+                        <div class="title-form form-item">
+                            <label for="title" class="form-label">Title: *</label>
+                            <input type="text" name="title" id="edit-title-input" class="form-input small-text-input" required>
+                        </div>
+                        <div class="description-form form-item">
+                            <label for="description">Description:</label>
+                            <input type="text" name="description" id="edit-description-input" class="form-input large-text-input">
+                        </div>
+                        <div class="date-form form-item">
+                            <label for="date">Due Date:</label>
+                            <input type="date" name="date" class="form-input" id="edit-date-input">
+                        </div>
+                        <div class="task-project-form form-item">
+                            <label for="project">Project:</label>
+                            <select name="project" class="form-input" id="edit-project-selection">
+
+                            </select>
+                        </div>
+                        <div class="priority-form form-item">
+                            <label for="priority">Priority: </label>
+                            <select name="priority" class="form-input" id="edit-priority-input">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Edit" id="submit-edits-button">
+                        <button id="close-edits-button">X</button>
+                    </form>
                 </div>
                 <div id="selection-header-container"></div>
                 <div id="task-headers">
                     <div>Task</div>
                     <div>Due Date</div>
                 </div>
-                <div id="tasks">
-
-                </div>
+                <div id="tasks"></div>
             </div>
         </div>
     

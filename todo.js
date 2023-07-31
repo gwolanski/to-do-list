@@ -1,16 +1,17 @@
 export let taskList = [];
 export let filteredTasks = [];
 let taskForm = document.getElementById("task-form");
+let editTaskFormContainer = document.getElementById("edit-form-container");
 
 export default function submitTask() {
     let title = document.getElementById("title-input").value;
     let description = document.getElementById("description-input").value;
     let dueDate= document.getElementById("date-input").value;
-    let priority = document.getElementById("priority-input").value;
     let projectSelection = document.getElementById("project-selection").value;
+    let priority = document.getElementById("priority-input").value;
     let taskComplete = false;
 
-    let task = new Task(title, description, dueDate, priority, projectSelection, taskComplete);
+    let task = new Task(title, description, dueDate, projectSelection, priority, taskComplete);
     taskList.push(task);
 
     displayAllTasks();
@@ -20,7 +21,7 @@ export default function submitTask() {
 }
 
 class Task {
-    constructor(title, description, dueDate, priority, projectSelection, taskComplete) {
+    constructor(title, description, dueDate, projectSelection, priority, taskComplete) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -106,7 +107,7 @@ function displayTask(task) {
     editTaskBtn.classList.add("edit");
     editTaskBtn.src = "./images/edit.png";
     editTaskBtn.addEventListener("click", (e) => {
-
+        editTask();
     })
 
     let deleteTaskBtn = document.createElement("img");
@@ -140,4 +141,13 @@ function deleteTask(task) {
 export function closeTaskForm() {
     let taskFormContainer = document.getElementById("form-container");
     taskFormContainer.style.display= "none"
+}
+
+export function closeEditForm() {
+    editTaskFormContainer.style.display = "none";
+
+}
+
+function editTask() {
+    editTaskFormContainer.style.display = "block";
 }
