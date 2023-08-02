@@ -34,15 +34,17 @@ class Task {
 export function displayAllTasks() {
     let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
+    console.log("taskList before:" + taskList.length);
 
     for (let i = 0; i < taskList.length; i++) {
         displayTask(taskList[i]);        
     }
-    
-    return tasks;
+    console.log("taskList after:" + taskList.length);
+    // return tasks;
 }
 
 export function displayFilteredTasks() {
+    let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
     for (let i = 0; i < filteredTasks.length; i++) {
         displayTask(filteredTasks[i]);
@@ -50,6 +52,7 @@ export function displayFilteredTasks() {
 }
 
 function displayTask(task) {
+    let tasks = document.getElementById("tasks");
     let taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
 
@@ -107,7 +110,7 @@ function displayTask(task) {
     editTaskBtn.classList.add("edit");
     editTaskBtn.src = "./images/edit.png";
     editTaskBtn.addEventListener("click", (e) => {
-        editTask();
+        editTask(task);
     })
 
     let deleteTaskBtn = document.createElement("img");
@@ -118,6 +121,7 @@ function displayTask(task) {
     })
 
     tasks.appendChild(taskContainer);
+    
 
     taskContainer.appendChild(checkbox);
     taskContainer.appendChild(taskDetails);
@@ -134,8 +138,8 @@ function displayTask(task) {
 
 function deleteTask(task) {
     const index = taskList.indexOf(task);
-        taskList.splice(index, 1);
-        displayAllTasks(); 
+    taskList.splice(index, 1);
+    displayAllTasks(); 
 }
 
 export function closeTaskForm() {
@@ -148,6 +152,42 @@ export function closeEditForm() {
 
 }
 
-function editTask() {
+function editTask(task) {
+    const index = taskList.indexOf(task);
+    let selectedTask = taskList[index];
+
+    let editTitle = document.getElementById("edit-title-input");
+    let editDescription = document.getElementById("edit-description-input");
+    let editDate = document.getElementById("edit-date-input");
+    let editProject = document.getElementById("edit-project-selection");
+    let editPriority = document.getElementById("edit-priority-input");
+
+    editTitle.value = selectedTask.title;
+    editDescription.value = selectedTask.description;
+    editDate.value = selectedTask.dueDate;
+    editProject.value = selectedTask.projectSelection;
+    editPriority.value = selectedTask.priority;
+
     editTaskFormContainer.style.display = "block";
+
+    console.log("taskList:" + taskList);
+
+    let submitEditsBtn = document.getElementById("submit-edits-button");
+    submitEditsBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        console.log(`EditTitle: ${editTitle.value}`);
+        selectedTask.title = editTitle.value;
+        selectedTask.description = editDescription.value;
+        selectedTask.dueDate = editDate.value;
+        selectedTask.projectSelection = editProject.value;
+        selectedTask.priority = editPriority.value;
+
+        editTaskFormContainer.style.display = "none";
+
+        displayAllTasks();
+    });
 }
+
+//current issue is that when there are multiple tasks and I edit one, all tasks are changed to the task I was editing. 
+
