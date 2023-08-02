@@ -34,13 +34,11 @@ class Task {
 export function displayAllTasks() {
     let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
-    console.log("taskList before:" + taskList.length);
 
     for (let i = 0; i < taskList.length; i++) {
         displayTask(taskList[i]);        
     }
-    console.log("taskList after:" + taskList.length);
-    // return tasks;
+
 }
 
 export function displayFilteredTasks() {
@@ -170,24 +168,27 @@ function editTask(task) {
 
     editTaskFormContainer.style.display = "block";
 
-    console.log("taskList:" + taskList);
-
     let submitEditsBtn = document.getElementById("submit-edits-button");
     submitEditsBtn.addEventListener("click", (e) => {
         e.preventDefault();
 
-        console.log(`EditTitle: ${editTitle.value}`);
         selectedTask.title = editTitle.value;
         selectedTask.description = editDescription.value;
         selectedTask.dueDate = editDate.value;
         selectedTask.projectSelection = editProject.value;
         selectedTask.priority = editPriority.value;
 
-        editTaskFormContainer.style.display = "none";
-
-        displayAllTasks();
+        if (selectedTask.title == "") {
+            alert("Title is required");
+            return false;
+        } else {
+            editTaskFormContainer.style.display = "none";
+            displayAllTasks();
+         }
+        
     });
 }
 
-//current issue is that when there are multiple tasks and I edit one, all tasks are changed to the task I was editing. 
+
+//current issue is that when there are multiple tasks and I edit the first one, all tasks are changed to the task I was editing. 
 
