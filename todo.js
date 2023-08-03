@@ -1,7 +1,9 @@
 export let taskList = [];
 export let filteredTasks = [];
 let taskForm = document.getElementById("task-form");
-let editTaskFormContainer = document.getElementById("edit-form-container");
+export let editTaskFormContainer = document.getElementById("edit-form-container");
+
+
 
 export default function submitTask() {
     let title = document.getElementById("title-input").value;
@@ -106,9 +108,11 @@ function displayTask(task) {
 
     let editTaskBtn = document.createElement("img");
     editTaskBtn.classList.add("edit");
+    editTaskBtn.setAttribute("id", "edit");
     editTaskBtn.src = "./images/edit.png";
     editTaskBtn.addEventListener("click", (e) => {
-        editTask(task);
+        // populateProjectDropdown();
+        displayEditForm(task);
     })
 
     let deleteTaskBtn = document.createElement("img");
@@ -150,9 +154,10 @@ export function closeEditForm() {
 
 }
 
-function editTask(task) {
+function displayEditForm(task) {
     const index = taskList.indexOf(task);
     let selectedTask = taskList[index];
+    displayEditForm.selectedTask = selectedTask;
 
     let editTitle = document.getElementById("edit-title-input");
     let editDescription = document.getElementById("edit-description-input");
@@ -167,28 +172,33 @@ function editTask(task) {
     editPriority.value = selectedTask.priority;
 
     editTaskFormContainer.style.display = "block";
-
-    let submitEditsBtn = document.getElementById("submit-edits-button");
-    submitEditsBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        selectedTask.title = editTitle.value;
-        selectedTask.description = editDescription.value;
-        selectedTask.dueDate = editDate.value;
-        selectedTask.projectSelection = editProject.value;
-        selectedTask.priority = editPriority.value;
-
-        if (selectedTask.title == "") {
-            alert("Title is required");
-            return false;
-        } else {
-            editTaskFormContainer.style.display = "none";
-            displayAllTasks();
-         }
-        
-    });
 }
 
+export function getSelectedTask() {
+    return displayEditForm.selectedTask;  
+}
 
-//current issue is that when there are multiple tasks and I edit the first one, all tasks are changed to the task I was editing. 
-
+export function submitEdits(task) {
+    const index = taskList.indexOf(task);
+    let selectedTask = taskList[index];
+    
+    let editedTitle = document.getElementById("edit-title-input");
+    let editedDescription = document.getElementById("edit-description-input");
+    let editedDate = document.getElementById("edit-date-input");
+    let editedProject = document.getElementById("edit-project-selection");
+    let editedPriority = document.getElementById("edit-priority-input");
+    
+    selectedTask.title = editedTitle.value;
+    selectedTask.description = editedDescription.value;
+    selectedTask.dueDate = editedDate.value;
+    selectedTask.projectSelection = editedProject.value;
+    selectedTask.priority = editedPriority.value;
+    
+    if (selectedTask.title == "") {
+        alert("Title is required");
+        return false;
+    } else {
+        editTaskFormContainer.style.display = "none";
+        displayAllTasks();
+     }
+}
