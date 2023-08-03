@@ -24,7 +24,7 @@ newProjectSubmit.addEventListener("click", submitNewProject);
 let newTaskButton = document.getElementById("new-task-container");
 newTaskButton.addEventListener("click", (e) => {
     taskFormContainer.style.display= "block";
-    populateProjectDropdown();
+    // populateProjectDropdown();
 })
 
 let closeButton = document.getElementById("close-button");
@@ -89,29 +89,12 @@ submitEditsBtn.addEventListener("click", (e) => {
 });
 
 
-function populateProjectDropdown() {
-    let newTaskProjectDropdown = document.getElementById("project-selection");
-    let editTaskProjectDropdown = document.getElementById("edit-project-selection");
-
-    newTaskProjectDropdown.innerHTML = "";
-    editTaskProjectDropdown.innerHTML = "";
-
-    let blankProject = document.createElement("option");
-    blankProject.innerHTML = " ";
-    newTaskProjectDropdown.appendChild(blankProject);
-    editTaskProjectDropdown.appendChild(blankProject);
-    
-    for (let i = 0; i < projectList.length; i++) {
-        let projectOption = document.createElement("option");
-        projectOption.innerHTML = projectList[i];
-        newTaskProjectDropdown.appendChild(projectOption);
-        editTaskProjectDropdown.appendChild(projectOption);
-    }
-}
 
 
-let editTaskBtn = document.getElementById("edit");
-editTaskBtn.addEventListener("click", populateProjectDropdown);
+
+// let editTaskBtn = document.getElementById("edit");
+// editTaskBtn.addEventListener("click", populateProjectDropdown);
+
 //current issue: trying to find a way to use populateProjectDropdown to populate both forms but 
 //they are now not showing up for my new tasks and i get an error in the console since the edit button doesnt exist
 //on startup. maybe instead of defining the button, I look at just creating a function that will populate 

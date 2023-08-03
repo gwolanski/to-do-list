@@ -1,3 +1,5 @@
+import { editTaskFormContainer } from "./todo";
+
 export let projectList = [];
 export let selectionHeaderContainer = document.getElementById("selection-header-container");
 
@@ -17,6 +19,8 @@ export default function submitNewProject() {
         emptyProjectError.innerHTML = "This field is required*";
         projectInput.parentNode.insertBefore(emptyProjectError, projectInput.nextSibling);
     }
+
+    populateProjectDropdown();
 
     return projectList
 }
@@ -89,4 +93,31 @@ function displayProjects() {
 function deleteProject(index) {
     projectList.splice(index, 1);
     displayProjects();
+    populateProjectDropdown();
+}
+
+function populateProjectDropdown() {
+    let newTaskProjectDropdown = document.getElementById("project-selection");
+    let editTaskProjectDropdown = document.getElementById("edit-project-selection");
+
+    newTaskProjectDropdown.innerHTML = "";
+    editTaskProjectDropdown.innerHTML = "";
+
+    let newBlankProject = document.createElement("option");
+    newBlankProject.innerHTML = " ";
+    newTaskProjectDropdown.appendChild(newBlankProject);
+
+    let editBlankProject = document.createElement("option");
+    editBlankProject.innerHTML = " ";
+    editTaskProjectDropdown.appendChild(editBlankProject);
+    
+    for (let i = 0; i < projectList.length; i++) {
+        let newProjectOption = document.createElement("option");
+        newProjectOption.innerHTML = projectList[i];
+        newTaskProjectDropdown.appendChild(newProjectOption);
+
+        let editProjectOption = document.createElement("option");
+        editProjectOption.innerHTML = projectList[i];
+        editTaskProjectDropdown.appendChild(editProjectOption);
+    }
 }
