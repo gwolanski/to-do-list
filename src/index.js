@@ -24,7 +24,6 @@ newProjectSubmit.addEventListener("click", submitNewProject);
 let newTaskButton = document.getElementById("new-task-container");
 newTaskButton.addEventListener("click", (e) => {
     taskFormContainer.style.display= "block";
-    // populateProjectDropdown();
 })
 
 let closeButton = document.getElementById("close-button");
@@ -53,6 +52,13 @@ function validateForm() {
         return false;
     } else {
         submitTask();
+        if (tasksFiltered == true) {
+            filterTasks();
+            displayFilteredTasks();
+        } else {
+            displayAllTasks();
+        }
+        
     }
 }
 
@@ -68,6 +74,11 @@ allTasksButton.addEventListener("click", (e) => {
 let projectSection = document.getElementById("projects");
 projectSection.addEventListener("click", (e) => {
     tasksFiltered = true;
+    filterTasks();
+    displayFilteredTasks();
+})
+
+function filterTasks() {
     let projectHeader = document.getElementById("selection-header").innerHTML;
     filteredTasks = [];
     taskList.forEach(task => {
@@ -75,27 +86,13 @@ projectSection.addEventListener("click", (e) => {
             filteredTasks.push(task);
         }
     });
-    displayFilteredTasks();
-})
+}
 
 let submitEditsBtn = document.getElementById("submit-edits-button");
 submitEditsBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     let currentTask = getSelectedTask();
-    console.log("currentTask: " + currentTask);
 
     submitEdits(currentTask);
 });
-
-
-
-
-
-// let editTaskBtn = document.getElementById("edit");
-// editTaskBtn.addEventListener("click", populateProjectDropdown);
-
-//current issue: trying to find a way to use populateProjectDropdown to populate both forms but 
-//they are now not showing up for my new tasks and i get an error in the console since the edit button doesnt exist
-//on startup. maybe instead of defining the button, I look at just creating a function that will populate 
-//the dropdowns after new projects added or deleted??
