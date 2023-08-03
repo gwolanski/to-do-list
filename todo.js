@@ -1,3 +1,5 @@
+import { projectList } from "./projects";
+
 export let taskList = [];
 export let filteredTasks = [];
 let taskForm = document.getElementById("task-form");
@@ -38,7 +40,7 @@ export function displayAllTasks() {
     tasks.innerHTML = "";
 
     for (let i = 0; i < taskList.length; i++) {
-        displayTask(taskList[i]);        
+        displayTask(taskList[i], projects);        
     }
 
 }
@@ -47,11 +49,11 @@ export function displayFilteredTasks() {
     let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
     for (let i = 0; i < filteredTasks.length; i++) {
-        displayTask(filteredTasks[i]);
+        displayTask(filteredTasks[i], projects);
     }
 }
 
-function displayTask(task) {
+function displayTask(task, projects) {
     let tasks = document.getElementById("tasks");
     let taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
@@ -111,7 +113,6 @@ function displayTask(task) {
     editTaskBtn.setAttribute("id", "edit");
     editTaskBtn.src = "./images/edit.png";
     editTaskBtn.addEventListener("click", (e) => {
-        // populateProjectDropdown();
         displayEditForm(task);
     })
 
