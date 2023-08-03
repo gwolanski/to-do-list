@@ -1,5 +1,5 @@
 import submitTask from "../dist/todo";
-import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm } from "../dist/todo";
+import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask} from "../dist/todo";
 import submitNewProject from "../dist/projects";
 import { projectList, removeError, selectionHeaderContainer } from "../dist/projects";
 
@@ -29,11 +29,13 @@ newTaskButton.addEventListener("click", (e) => {
 
 let closeButton = document.getElementById("close-button");
 closeButton.addEventListener("click", (e) => {
-   closeTaskForm();
+    e.preventDefault();
+    closeTaskForm();
 })
 
 let closeEditsButton = document.getElementById("close-edits-button");
 closeEditsButton.addEventListener("click", (e) => {
+    e.preventDefault();
     closeEditForm();
 })
 
@@ -54,21 +56,6 @@ function validateForm() {
     }
 }
 
-function populateProjectDropdown() {
-    let projectDropdown = document.getElementById("project-selection");
-
-    projectDropdown.innerHTML = "";
-
-    let blankProject = document.createElement("option");
-    blankProject.innerHTML = " ";
-    projectDropdown.appendChild(blankProject);
-    
-    for (let i = 0; i < projectList.length; i++) {
-        let projectOption = document.createElement("option");
-        projectOption.innerHTML = projectList[i];
-        projectDropdown.appendChild(projectOption);
-    }
-}
 
 let allTasksButton = document.getElementById("all-tasks");
 allTasksButton.addEventListener("click", (e) => {
@@ -91,4 +78,41 @@ projectSection.addEventListener("click", (e) => {
     displayFilteredTasks();
 })
 
+let submitEditsBtn = document.getElementById("submit-edits-button");
+submitEditsBtn.addEventListener("click", (e) => {
+    e.preventDefault();
 
+    let currentTask = getSelectedTask();
+    console.log("currentTask: " + currentTask);
+
+    submitEdits(currentTask);
+});
+
+
+function populateProjectDropdown() {
+    let newTaskProjectDropdown = document.getElementById("project-selection");
+    let editTaskProjectDropdown = document.getElementById("edit-project-selection");
+
+    newTaskProjectDropdown.innerHTML = "";
+    editTaskProjectDropdown.innerHTML = "";
+
+    let blankProject = document.createElement("option");
+    blankProject.innerHTML = " ";
+    newTaskProjectDropdown.appendChild(blankProject);
+    editTaskProjectDropdown.appendChild(blankProject);
+    
+    for (let i = 0; i < projectList.length; i++) {
+        let projectOption = document.createElement("option");
+        projectOption.innerHTML = projectList[i];
+        newTaskProjectDropdown.appendChild(projectOption);
+        editTaskProjectDropdown.appendChild(projectOption);
+    }
+}
+
+
+let editTaskBtn = document.getElementById("edit");
+editTaskBtn.addEventListener("click", populateProjectDropdown);
+//current issue: trying to find a way to use populateProjectDropdown to populate both forms but 
+//they are now not showing up for my new tasks and i get an error in the console since the edit button doesnt exist
+//on startup. maybe instead of defining the button, I look at just creating a function that will populate 
+//the dropdowns after new projects added or deleted??
