@@ -47,37 +47,11 @@ function displayProjects() {
         projectContainer.appendChild(projectText);
 
         projectText.addEventListener("click", (e) => {
-            ///When you click on a project, the main part of the page changes so only the tasks related to that project are shown
-            //any other task should be "hidden"
-
             selectionHeaderContainer.innerHTML = "";
             let projectHeader = document.createElement('div');
             projectHeader.innerHTML = projectList[i];
             projectHeader.setAttribute("id", "selection-header");
             selectionHeaderContainer.appendChild(projectHeader);
-            
-            //run a for loop that cycles through the task list and looks for objects that are designated for a certain project
-
-            ///IDEA: just have the event listener make the "selection header" text appear at the top,
-            //then, in the index.js create a function that looks for the selection header div, finds its contents and changes the tasks displayed based on this. 
-            //this idea could potentially work for both projects and date related filtering
-
-            // let tasks = document.getElementById("tasks");
-            // tasks.innerHTML = "";
-
-            // let focusedProject = projectList[i];
-            // let focusedProjectTasks = [];
-            
-            // for (let i = 0; i < taskList.length; i++) {
-            //     if (taskList[i].projectSelection == focusedProject) {
-            //         focusedProjectTasks.push(taskList[i]);
-            //         displayTasks();
-            //     }
-
-            // }
-            //create a new object array and push the desired task objects into this new array
-            //display contents of array.
-
         })
 
         let deleteProjectBtn = document.createElement("img");

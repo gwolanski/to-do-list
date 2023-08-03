@@ -18,8 +18,6 @@ export default function submitTask() {
     let task = new Task(title, description, dueDate, projectSelection, priority, taskComplete);
     taskList.push(task);
 
-    displayAllTasks();
-
     closeTaskForm();
     taskForm.reset();
 }
@@ -49,11 +47,11 @@ export function displayFilteredTasks() {
     let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
     for (let i = 0; i < filteredTasks.length; i++) {
-        displayTask(filteredTasks[i], projects);
+        displayTask(filteredTasks[i]);
     }
 }
 
-function displayTask(task, projects) {
+function displayTask(task) {
     let tasks = document.getElementById("tasks");
     let taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container");
