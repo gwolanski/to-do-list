@@ -94,5 +94,16 @@ submitEditsBtn.addEventListener("click", (e) => {
 
     let currentTask = getSelectedTask();
 
-    submitEdits(currentTask);
+    console.log("tasksFiltered: " + tasksFiltered); 
+
+    if (tasksFiltered == true) {
+        submitEdits(currentTask);
+        filterTasks();
+        displayFilteredTasks();
+        
+    } else {
+        submitEdits(currentTask);
+    }
+
+    
 });
