@@ -4,6 +4,8 @@ import submitNewProject from "../dist/projects";
 import { projectList, removeError, selectionHeaderContainer } from "../dist/projects";
 
 let tasksFiltered = false;
+let filteredByProject = false;
+let filteredByDate = false;
 
 let taskFormContainer = document.getElementById("form-container");
 
@@ -53,12 +55,15 @@ function validateForm() {
     } else {
         submitTask();
         if (tasksFiltered == true) {
-            filterTasks();
+            if (filteredByProject = true) {
+                filterTasksByProject();
+            } else if (filteredByDate = true) {
+                filterTasksByDate();
+            }
             displayFilteredTasks();
         } else {
             displayAllTasks();
         }
-        
     }
 }
 
@@ -66,20 +71,58 @@ function validateForm() {
 let allTasksButton = document.getElementById("all-tasks");
 allTasksButton.addEventListener("click", (e) => {
     tasksFiltered = false;
+
     selectionHeaderContainer.innerHTML = "";
+    let allTasksHeader = document.createElement("div");
+    allTasksHeader.innerHTML = "All Tasks";
+    allTasksHeader.setAttribute("id", "selection-header");
+    selectionHeaderContainer.appendChild(allTasksHeader);
+
     displayAllTasks();
+});
+
+let todayButton = document.getElementById("today-tasks");
+todayButton.addEventListener("click", (e) => {
+    tasksFiltered = true;
+    filteredByDate = true;
+
+    selectionHeaderContainer.innerHTML = "";
+    let todayHeader = document.createElement("div");
+    todayHeader.innerHTML = "Due Today";
+    todayHeader.setAttribute("id", "selection-header");
+    selectionHeaderContainer.appendChild(todayHeader);
+
+    filterTasksByDate();
+    displayFilteredTasks();
+});
+
+let weekButton = document.getElementById("week-tasks");
+weekButton.addEventListener("click", (e) => {
+    tasksFiltered = true;
+    filteredByDate = true;
+
+    selectionHeaderContainer.innerHTML = "";
+    let weekHeader = document.createElement("div");
+    weekHeader.innerHTML = "Due Within a Week";
+    weekHeader.setAttribute("id", "selection-header");
+    selectionHeaderContainer.appendChild(weekHeader);
+
+    filterTasksByDate();
+    displayFilteredTasks();
 })
 
 
 let projectSection = document.getElementById("projects");
 projectSection.addEventListener("click", (e) => {
     tasksFiltered = true;
-    filterTasks();
-    displayFilteredTasks();
-})
+    filteredByProject = true;
 
-function filterTasks() {
-    let projectHeader = document.getElementById("selection-header").innerHTML;
+    filterTasksByProject();
+    displayFilteredTasks();
+});
+
+function filterTasksByProject() {
+    let projectHeader = getFilteredHeader();
     filteredTasks = [];
     taskList.forEach(task => {
         if (task.projectSelection == projectHeader) {
@@ -87,6 +130,22 @@ function filterTasks() {
         }
     });
 }
+
+function filterTasksByDate() {
+    let currentDate = getDate();
+    let dateFilterHeader = getFilteredHeader();
+    filteredTasks = [];
+    taskList.forEach(task => {
+        if (dateFilterHeader == "Due Today") {
+            if (task.dueDate == currentDate) {
+                filteredTasks.push(task);
+                console.log("filteredTasks: " + filteredTasks);
+            }
+        } else if (dateFilterHeader == "Due Within a Week") {
+            console.log("due this week");
+        }
+    })
+};
 
 let submitEditsBtn = document.getElementById("submit-edits-button");
 submitEditsBtn.addEventListener("click", (e) => {
@@ -98,12 +157,34 @@ submitEditsBtn.addEventListener("click", (e) => {
 
     if (tasksFiltered == true) {
         submitEdits(currentTask);
-        filterTasks();
+        if (filteredByProject = true) {
+            filterTasksByProject();
+        } else if (filteredByDate = true) {
+            filterTasksByDate();
+        }
         displayFilteredTasks();
         
     } else {
         submitEdits(currentTask);
-    }
-
-    
+    } 
 });
+
+function getDate() {
+    let jsonDate = new Date().toJSON().slice(0,10);
+    console.log("json today: " + jsonDate);
+    return jsonDate;
+}
+
+function getFilteredHeader() {
+    let filteredHeader = document.getElementById("selection-header").innerHTML;
+    return filteredHeader;
+}
+
+// const date = new Date();
+// let dateDay = date.getDate();
+// let dateMonth = date.getMonth() + 1;
+// let dateYear = date.getFullYear();
+// let currentDate = `${dateYear}-${dateMonth}-${dateDay}`
+// console.log("today: " + currentDate);
+// let jsonDate = new Date().toJSON().slice(0,10);
+// console.log("json today: " + jsonDate);

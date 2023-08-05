@@ -1,5 +1,3 @@
-import { projectList } from "./projects";
-
 export let taskList = [];
 export let filteredTasks = [];
 let taskForm = document.getElementById("task-form");
@@ -38,7 +36,7 @@ export function displayAllTasks() {
     tasks.innerHTML = "";
 
     for (let i = 0; i < taskList.length; i++) {
-        displayTask(taskList[i], projects);        
+        displayTask(taskList[i]);        
     }
 
 }

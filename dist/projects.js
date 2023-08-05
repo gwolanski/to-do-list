@@ -1,5 +1,3 @@
-import { editTaskFormContainer } from "./todo";
-
 export let projectList = [];
 export let selectionHeaderContainer = document.getElementById("selection-header-container");
 
