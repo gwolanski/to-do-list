@@ -133,16 +133,18 @@ function filterTasksByProject() {
 
 function filterTasksByDate() {
     let currentDate = getDate();
+    let oneWeekDate = getWeekDate();
     let dateFilterHeader = getFilteredHeader();
     filteredTasks = [];
     taskList.forEach(task => {
         if (dateFilterHeader == "Due Today") {
             if (task.dueDate == currentDate) {
                 filteredTasks.push(task);
-                console.log("filteredTasks: " + filteredTasks);
             }
         } else if (dateFilterHeader == "Due Within a Week") {
-            console.log("due this week");
+            if (task.dueDate <= oneWeekDate) {
+                filteredTasks.push(task);
+            }  
         }
     })
 };
@@ -173,18 +175,16 @@ function getDate() {
     let jsonDate = new Date().toJSON().slice(0,10);
     console.log("json today: " + jsonDate);
     return jsonDate;
+};
+
+function getWeekDate() {
+    let date = new Date();
+    date.setDate(date.getDate() + 7);
+    let oneWeekFromToday = date.toJSON().slice(0,10);
+    return oneWeekFromToday;
 }
 
 function getFilteredHeader() {
     let filteredHeader = document.getElementById("selection-header").innerHTML;
     return filteredHeader;
 }
-
-// const date = new Date();
-// let dateDay = date.getDate();
-// let dateMonth = date.getMonth() + 1;
-// let dateYear = date.getFullYear();
-// let currentDate = `${dateYear}-${dateMonth}-${dateDay}`
-// console.log("today: " + currentDate);
-// let jsonDate = new Date().toJSON().slice(0,10);
-// console.log("json today: " + jsonDate);
