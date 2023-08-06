@@ -54,13 +54,18 @@ function validateForm() {
         return false;
     } else {
         submitTask();
+        //i think current issue is in the below code. while filtering, if you add a new task, on submit the 
+        //tasks disappear until you start clicking other filters.
+        //filterTaskByProject works fine, but not by date.
+        console.log("tasksFiltered: " + tasksFiltered);
         if (tasksFiltered == true) {
             if (filteredByProject = true) {
                 filterTasksByProject();
+                displayFilteredTasks();
             } else if (filteredByDate = true) {
                 filterTasksByDate();
+                displayFilteredTasks();
             }
-            displayFilteredTasks();
         } else {
             displayAllTasks();
         }
@@ -127,7 +132,7 @@ function filterTasksByProject() {
     taskList.forEach(task => {
         if (task.projectSelection == projectHeader) {
             filteredTasks.push(task);
-        }
+        };
     });
 }
 
@@ -145,8 +150,9 @@ function filterTasksByDate() {
             if (task.dueDate <= oneWeekDate) {
                 filteredTasks.push(task);
             }  
-        }
-    })
+        };
+    });
+    console.log("filteredTasks: " + filteredTasks);
 };
 
 let submitEditsBtn = document.getElementById("submit-edits-button");
@@ -173,7 +179,6 @@ submitEditsBtn.addEventListener("click", (e) => {
 
 function getDate() {
     let jsonDate = new Date().toJSON().slice(0,10);
-    console.log("json today: " + jsonDate);
     return jsonDate;
 };
 
