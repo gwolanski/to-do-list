@@ -17,7 +17,7 @@ export default function submitTask() {
     taskList.push(task);
 
     closeTaskForm();
-    taskForm.reset();
+    
 }
 
 class Task {
@@ -143,7 +143,8 @@ function deleteTask(task) {
 
 export function closeTaskForm() {
     let taskFormContainer = document.getElementById("form-container");
-    taskFormContainer.style.display= "none"
+    taskFormContainer.style.display= "none";
+    taskForm.reset();
 }
 
 export function closeEditForm() {
