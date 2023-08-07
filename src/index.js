@@ -58,14 +58,13 @@ function validateForm() {
         //tasks disappear until you start clicking other filters.
         //filterTaskByProject works fine, but not by date.
         console.log("tasksFiltered: " + tasksFiltered);
-        if (tasksFiltered == true) {
-            if (filteredByProject = true) {
+        if (tasksFiltered) {
+            if (filteredByProject) {
                 filterTasksByProject();
-                displayFilteredTasks();
-            } else if (filteredByDate = true) {
+            } else if (filteredByDate) {
                 filterTasksByDate();
-                displayFilteredTasks();
             }
+            displayFilteredTasks();
         } else {
             displayAllTasks();
         }
@@ -90,6 +89,7 @@ let todayButton = document.getElementById("today-tasks");
 todayButton.addEventListener("click", (e) => {
     tasksFiltered = true;
     filteredByDate = true;
+    filteredByProject = false;
 
     selectionHeaderContainer.innerHTML = "";
     let todayHeader = document.createElement("div");
@@ -105,6 +105,7 @@ let weekButton = document.getElementById("week-tasks");
 weekButton.addEventListener("click", (e) => {
     tasksFiltered = true;
     filteredByDate = true;
+    filteredByProject = false;
 
     selectionHeaderContainer.innerHTML = "";
     let weekHeader = document.createElement("div");
@@ -121,6 +122,7 @@ let projectSection = document.getElementById("projects");
 projectSection.addEventListener("click", (e) => {
     tasksFiltered = true;
     filteredByProject = true;
+    filteredByDate = false;
 
     filterTasksByProject();
     displayFilteredTasks();
@@ -141,6 +143,7 @@ function filterTasksByDate() {
     let oneWeekDate = getWeekDate();
     let dateFilterHeader = getFilteredHeader();
     filteredTasks = [];
+    console.log("currentDate:" + currentDate);
     taskList.forEach(task => {
         if (dateFilterHeader == "Due Today") {
             if (task.dueDate == currentDate) {
@@ -178,8 +181,10 @@ submitEditsBtn.addEventListener("click", (e) => {
 });
 
 function getDate() {
-    let jsonDate = new Date().toJSON().slice(0,10);
-    return jsonDate;
+    // const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    //find a way to set date based off of local computer timezone
+    let date = new Date().toJSON().slice(0,10);
+    return date;
 };
 
 function getWeekDate() {
@@ -193,3 +198,6 @@ function getFilteredHeader() {
     let filteredHeader = document.getElementById("selection-header").innerHTML;
     return filteredHeader;
 }
+
+console.log("getDate: " + getDate());
+console.log("getWeekDate: " + getWeekDate());
