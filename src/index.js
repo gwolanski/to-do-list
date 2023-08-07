@@ -54,10 +54,6 @@ function validateForm() {
         return false;
     } else {
         submitTask();
-        //i think current issue is in the below code. while filtering, if you add a new task, on submit the 
-        //tasks disappear until you start clicking other filters.
-        //filterTaskByProject works fine, but not by date.
-        console.log("tasksFiltered: " + tasksFiltered);
         if (tasksFiltered) {
             if (filteredByProject) {
                 filterTasksByProject();
@@ -143,7 +139,6 @@ function filterTasksByDate() {
     let oneWeekDate = getWeekDate();
     let dateFilterHeader = getFilteredHeader();
     filteredTasks = [];
-    console.log("currentDate:" + currentDate);
     taskList.forEach(task => {
         if (dateFilterHeader == "Due Today") {
             if (task.dueDate == currentDate) {
@@ -155,7 +150,6 @@ function filterTasksByDate() {
             }  
         };
     });
-    console.log("filteredTasks: " + filteredTasks);
 };
 
 let submitEditsBtn = document.getElementById("submit-edits-button");
@@ -163,8 +157,6 @@ submitEditsBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     let currentTask = getSelectedTask();
-
-    console.log("tasksFiltered: " + tasksFiltered); 
 
     if (tasksFiltered == true) {
         submitEdits(currentTask);
@@ -199,5 +191,5 @@ function getFilteredHeader() {
     return filteredHeader;
 }
 
-console.log("getDate: " + getDate());
-console.log("getWeekDate: " + getWeekDate());
+document.getElementById("edit-date-input").setAttribute("min", getDate());
+document.getElementById("date-input").setAttribute("min", getDate());
