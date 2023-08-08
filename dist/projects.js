@@ -10,6 +10,7 @@ export default function submitNewProject() {
         removeError();
         projectList.push(newProject);
         projectForm.reset();
+        storeProjectList();
         displayProjects();
     } else {
         let emptyProjectError = document.createElement("div");
@@ -64,6 +65,7 @@ function displayProjects() {
 
 function deleteProject(index) {
     projectList.splice(index, 1);
+    storeProjectList();
     displayProjects();
     populateProjectDropdown();
 }
@@ -93,3 +95,19 @@ function populateProjectDropdown() {
         editTaskProjectDropdown.appendChild(editProjectOption);
     }
 }
+
+function storeProjectList() { 
+    localStorage.setItem('projects', JSON.stringify(projectList));
+}
+
+function getProjectList() { 
+    let storedProjects = localStorage.getItem('projects');
+    if (storedProjects) {
+        let parsedProjects = JSON.parse(storedProjects);
+        projectList = parsedProjects;
+        displayProjects();
+        populateProjectDropdown();
+    }
+}
+
+getProjectList();

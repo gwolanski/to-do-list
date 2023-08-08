@@ -173,11 +173,10 @@ submitEditsBtn.addEventListener("click", (e) => {
 });
 
 function getDate() {
-    // const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    //find a way to set date based off of local computer timezone
-    let date = new Date().toJSON().slice(0,10);
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const date = new Date().toLocaleDateString(undefined, options).replace(/\//g, '-');
     return date;
-};
+}; 
 
 function getWeekDate() {
     let date = new Date();
