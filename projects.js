@@ -11,6 +11,7 @@ export default function submitNewProject() {
         projectList.push(newProject);
         projectForm.reset();
         storeProjectList();
+        document.getElementById("new-project-form").style.display = "none";
         displayProjects();
     } else {
         let emptyProjectError = document.createElement("div");
@@ -54,7 +55,7 @@ function displayProjects() {
         })
 
         let deleteProjectBtn = document.createElement("img");
-        deleteProjectBtn.classList.add("delete");
+        deleteProjectBtn.classList.add("delete-project");
         deleteProjectBtn.src = "./images/trash.png";
         deleteProjectBtn.addEventListener("click", (e) => {
             deleteProject(i);

@@ -115,7 +115,7 @@ function displayTask(task) {
     })
 
     let deleteTaskBtn = document.createElement("img");
-    deleteTaskBtn.classList.add("delete");
+    deleteTaskBtn.classList.add("delete-task");
     deleteTaskBtn.src = "./images/trash-black.png";
     deleteTaskBtn.addEventListener("click", (e) => {
         deleteTask(task);
