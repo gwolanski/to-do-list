@@ -16,6 +16,8 @@ export default function submitTask() {
     let task = new Task(title, description, dueDate, projectSelection, priority, taskComplete);
     taskList.push(task);
 
+    storeTaskList();
+
     closeTaskForm();
     
 }
@@ -197,6 +199,22 @@ export function submitEdits(task) {
         return false;
     } else {
         editTaskFormContainer.style.display = "none";
+        storeTaskList();
         displayAllTasks();
      }
 }
+
+function storeTaskList() { 
+    localStorage.setItem('tasks', JSON.stringify(taskList));
+}
+
+function getTaskList() { 
+    let storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+        let parsedTasks = JSON.parse(storedTasks);
+        taskList = parsedTasks;
+        displayAllTasks();
+    }
+}
+
+getTaskList();
