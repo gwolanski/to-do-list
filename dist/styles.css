@@ -64,7 +64,6 @@ body {
 
 .project-text {
     text-decoration: none;
-    font-size: 1.3rem;
 }
 
 .project-text:hover {
@@ -77,10 +76,20 @@ body {
 
 .project-container {
     display: grid;
-    grid-template-columns: 4fr 30px;
+    grid-template-columns: 130px 30px;
+    gap: 5px;
     align-items: center;
-    padding-left: 20px;
-    font-size: 1.2rem;
+    padding: 7.5px 20px;
+    font-size: 1.1rem;
+}
+
+.delete-project {
+    width: 20px;
+    height: 20px;
+}
+
+.delete-project:hover {
+    cursor: pointer;
 }
 
 #projects-header {
@@ -387,7 +396,7 @@ body {
     height: 20px;
 }
 
-.delete {
+.delete-task {
     grid-column: 8;
     width: 20px;
     height: 20px;

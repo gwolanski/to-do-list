@@ -193,5 +193,3 @@ function getFilteredHeader() {
 
 document.getElementById("edit-date-input").setAttribute("min", getDate());
 document.getElementById("date-input").setAttribute("min", getDate());
-
-console.log(getDate());
