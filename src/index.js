@@ -174,8 +174,9 @@ submitEditsBtn.addEventListener("click", (e) => {
 
 function getDate() {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    const date = new Date().toLocaleDateString(undefined, options).replace(/\//g, '-');
-    return date;
+    const date = new Date().toLocaleDateString(undefined, options);
+    const [month, day, year] = date.split("/");
+    return `${year}-${month}-${day}`;
 }; 
 
 function getWeekDate() {
@@ -192,3 +193,5 @@ function getFilteredHeader() {
 
 document.getElementById("edit-date-input").setAttribute("min", getDate());
 document.getElementById("date-input").setAttribute("min", getDate());
+
+console.log(getDate());
