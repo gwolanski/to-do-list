@@ -5,14 +5,31 @@ export default function submitNewProject() {
     let newProject = document.getElementById("new-project-entry").value;
     let projectInput = document.getElementById("new-project-entry");
     let projectForm = document.getElementById("new-project-form");
+    let projectValid = true;
 
     if (newProject != "") {
+        //maybe create a for loop that cycles through project list and makes sure newProject is not equal to any
+        //existing projects. If so, error message.
         removeError();
-        projectList.push(newProject);
-        projectForm.reset();
-        storeProjectList();
-        document.getElementById("new-project-form").style.display = "none";
-        displayProjects();
+        for (let i = 0 ; i < projectList.length ; i++) {
+            if (newProject == projectList[i]) {
+                let duplicateProjectError = document.createElement("div");
+                duplicateProjectError.id = "project-error";
+                duplicateProjectError.innerHTML = "Project already exists*";
+                projectInput.parentNode.insertBefore(duplicateProjectError, projectInput.nextSibling);
+                projectValid = false;
+            }
+        }
+
+        if (projectValid) {
+            projectList.push(newProject);
+            projectForm.reset();
+            storeProjectList();
+            document.getElementById("new-project-form").style.display = "none";
+            displayProjects();
+        }
+        
+
     } else {
         let emptyProjectError = document.createElement("div");
         emptyProjectError.id = "project-error";
