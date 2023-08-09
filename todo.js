@@ -135,6 +135,12 @@ function displayTask(task) {
     taskDetails.appendChild(taskDescription);
     taskDetails.appendChild(taskProject);
     taskDetails.appendChild(taskPriority);
+
+    if (task.priority == "High") {
+        taskContainer.classList.add("high-priority");
+    } else if (task.priority == "Medium") {
+        taskContainer.classList.add("medium-priority");
+    }
 }
 
 function deleteTask(task) {

@@ -8,8 +8,6 @@ export default function submitNewProject() {
     let projectValid = true;
 
     if (newProject != "") {
-        //maybe create a for loop that cycles through project list and makes sure newProject is not equal to any
-        //existing projects. If so, error message.
         removeError();
         for (let i = 0 ; i < projectList.length ; i++) {
             if (newProject == projectList[i]) {
