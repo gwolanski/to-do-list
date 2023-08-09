@@ -1,7 +1,7 @@
 import submitTask from "../dist/todo";
 import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask} from "../dist/todo";
 import submitNewProject from "../dist/projects";
-import { projectList, removeError, selectionHeaderContainer } from "../dist/projects";
+import { removeError, selectionHeaderContainer } from "../dist/projects";
 
 let tasksFiltered = false;
 let filteredByProject = false;
@@ -18,6 +18,8 @@ let newProjectCancel = document.getElementById("cancel-new-project");
 newProjectCancel.addEventListener("click", (e) => {
     document.getElementById("new-project-form").style.display = "none";
     removeError();
+    let projectForm = document.getElementById("new-project-form");
+    projectForm.reset();
 })
 
 let newProjectSubmit = document.getElementById("add-new-project");
@@ -136,6 +138,7 @@ function filterTasksByProject() {
 
 function filterTasksByDate() {
     let currentDate = getDate();
+    console.log("currentDate: " + currentDate);
     let oneWeekDate = getWeekDate();
     let dateFilterHeader = getFilteredHeader();
     filteredTasks = [];
@@ -145,11 +148,14 @@ function filterTasksByDate() {
                 filteredTasks.push(task);
             }
         } else if (dateFilterHeader == "Due Within a Week") {
-            if (task.dueDate <= oneWeekDate) {
+            let taskDueDate = new Date(task.dueDate);
+            let oneWeekDateObject = new Date(oneWeekDate);
+            if (taskDueDate <= oneWeekDateObject) {
                 filteredTasks.push(task);
-            }  
+            }   
         };
     });
+    console.log("filteredTasks:" + filteredTasks);
 };
 
 let submitEditsBtn = document.getElementById("submit-edits-button");
@@ -180,9 +186,12 @@ function getDate() {
 }; 
 
 function getWeekDate() {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     let date = new Date();
     date.setDate(date.getDate() + 7);
-    let oneWeekFromToday = date.toJSON().slice(0,10);
+    let localDate = date.toLocaleDateString(undefined, options);
+    const [month, day, year] = localDate.split("/");
+    let oneWeekFromToday = `${year}-${month}-${day}`;
     return oneWeekFromToday;
 }
 
