@@ -1,7 +1,7 @@
 import submitTask from "../dist/todo";
 import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask} from "../dist/todo";
 import submitNewProject from "../dist/projects";
-import { removeError, selectionHeaderContainer } from "../dist/projects";
+import { removeError, selectionHeaderContainer, displayProjects } from "../dist/projects";
 
 let tasksFiltered = false;
 let filteredByProject = false;
@@ -74,14 +74,18 @@ let allTasksButton = document.getElementById("all-tasks");
 allTasksButton.addEventListener("click", (e) => {
     tasksFiltered = false;
 
+    allTaskHeader();
+
+    displayAllTasks();
+});
+
+function allTaskHeader() {
     selectionHeaderContainer.innerHTML = "";
     let allTasksHeader = document.createElement("div");
     allTasksHeader.innerHTML = "All Tasks";
     allTasksHeader.setAttribute("id", "selection-header");
     selectionHeaderContainer.appendChild(allTasksHeader);
-
-    displayAllTasks();
-});
+}
 
 let todayButton = document.getElementById("today-tasks");
 todayButton.addEventListener("click", (e) => {
@@ -124,6 +128,14 @@ projectSection.addEventListener("click", (e) => {
 
     filterTasksByProject();
     displayFilteredTasks();
+});
+
+projectSection.addEventListener("click", (e) => {
+    if (e.target.classList.contains('delete-project')) {
+        tasksFiltered = false;
+        allTaskHeader();
+        displayAllTasks();
+    }
 });
 
 function filterTasksByProject() {
@@ -202,3 +214,5 @@ function getFilteredHeader() {
 
 document.getElementById("edit-date-input").setAttribute("min", getDate());
 document.getElementById("date-input").setAttribute("min", getDate());
+
+
