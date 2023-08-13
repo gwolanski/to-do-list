@@ -208,6 +208,7 @@ export function submitEdits(task) {
         storeTaskList();
         displayAllTasks();
      }
+
 }
 
 function storeTaskList() { 
