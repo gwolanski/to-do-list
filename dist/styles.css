@@ -161,6 +161,12 @@ body {
     padding: 5px;
 }
 
+#body-top-row {
+    display: flex;
+    flex-direction: row;
+    gap: 295px;
+}
+
 #new-task-container {
     display: flex;
     flex-direction: row;
@@ -173,6 +179,24 @@ body {
 
 #new-task-container:hover {
     cursor: pointer;
+}
+
+#color-key-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.priority-key {
+    border-radius: 15px;
+    padding: 5px;
+    font-weight: 400;
+}
+
+#low-priority {
+    background-color: rgb(221, 221, 221);
 }
 
 #form-container,
