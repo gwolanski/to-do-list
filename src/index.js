@@ -1,7 +1,7 @@
 import submitTask from "../dist/todo";
 import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask} from "../dist/todo";
 import submitNewProject from "../dist/projects";
-import { removeError, selectionHeaderContainer, displayProjects } from "../dist/projects";
+import { removeError, selectionHeaderContainer} from "../dist/projects";
 
 let tasksFiltered = false;
 let filteredByProject = false;
