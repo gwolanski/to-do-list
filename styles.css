@@ -164,7 +164,8 @@ body {
 #body-top-row {
     display: flex;
     flex-direction: row;
-    gap: 295px;
+    gap: 290px;
+    margin: 5px;
 }
 
 #new-task-container {
