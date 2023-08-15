@@ -61,7 +61,7 @@ function displayProjects() {
         projectText.innerHTML = projectList[i];
         projectContainer.appendChild(projectText);
 
-        projectText.addEventListener("click", (e) => {
+        projectText.addEventListener("click", () => {
             selectionHeaderContainer.innerHTML = "";
             let projectHeader = document.createElement('div');
             projectHeader.innerHTML = projectList[i];
@@ -72,7 +72,7 @@ function displayProjects() {
         let deleteProjectBtn = document.createElement("img");
         deleteProjectBtn.classList.add("delete-project");
         deleteProjectBtn.src = "./images/trash.png";
-        deleteProjectBtn.addEventListener("click", (e) => {
+        deleteProjectBtn.addEventListener("click", () => {
             deleteProject(i);
         })
         projectContainer.appendChild(deleteProjectBtn);

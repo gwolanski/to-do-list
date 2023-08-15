@@ -102,7 +102,7 @@ function displayTask(task) {
     let expandTaskBtn = document.createElement("img");
     expandTaskBtn.classList.add("expand-button");
     expandTaskBtn.src = "./images/expand-arrow.png";
-    expandTaskBtn.addEventListener("click", (e) => {
+    expandTaskBtn.addEventListener("click", () => {
         taskDetails.classList.toggle("expanded");
     })
 
@@ -110,14 +110,14 @@ function displayTask(task) {
     editTaskBtn.classList.add("edit");
     editTaskBtn.setAttribute("id", "edit");
     editTaskBtn.src = "./images/edit.png";
-    editTaskBtn.addEventListener("click", (e) => {
+    editTaskBtn.addEventListener("click", () => {
         displayEditForm(task);
     })
 
     let deleteTaskBtn = document.createElement("img");
     deleteTaskBtn.classList.add("delete-task");
     deleteTaskBtn.src = "./images/trash-black.png";
-    deleteTaskBtn.addEventListener("click", (e) => {
+    deleteTaskBtn.addEventListener("click", () => {
         deleteTask(task);
     })
 

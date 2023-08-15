@@ -10,43 +10,43 @@ let filteredByDate = false;
 let taskFormContainer = document.getElementById("form-container");
 
 let newProjectButton = document.getElementById("new-project");
-newProjectButton.addEventListener("click", (e) => {
+newProjectButton.addEventListener("click", () => {
     document.getElementById("new-project-form").style.display = "block";
-})
+});
 
 let newProjectCancel = document.getElementById("cancel-new-project");
-newProjectCancel.addEventListener("click", (e) => {
+newProjectCancel.addEventListener("click", () => {
     document.getElementById("new-project-form").style.display = "none";
     removeError();
     let projectForm = document.getElementById("new-project-form");
     projectForm.reset();
-})
+});
 
 let newProjectSubmit = document.getElementById("add-new-project");
 newProjectSubmit.addEventListener("click", submitNewProject);
    
 let newTaskButton = document.getElementById("new-task-container");
-newTaskButton.addEventListener("click", (e) => {
+newTaskButton.addEventListener("click", () => {
     taskFormContainer.style.display= "block";
-})
+});
 
 let closeButton = document.getElementById("close-button");
 closeButton.addEventListener("click", (e) => {
     e.preventDefault();
     closeTaskForm();
-})
+});
 
 let closeEditsButton = document.getElementById("close-edits-button");
 closeEditsButton.addEventListener("click", (e) => {
     e.preventDefault();
     closeEditForm();
-})
+});
 
 let submitButton = document.getElementById("submit-button");
 submitButton.addEventListener("click", (e) => {
     e.preventDefault();
     validateForm();
-})
+});
 
 function validateForm() {
     let title = document.getElementById("title-input").value;
@@ -71,7 +71,7 @@ function validateForm() {
 
 
 let allTasksButton = document.getElementById("all-tasks");
-allTasksButton.addEventListener("click", (e) => {
+allTasksButton.addEventListener("click", () => {
     tasksFiltered = false;
 
     allTaskHeader();
@@ -88,7 +88,7 @@ function allTaskHeader() {
 }
 
 let todayButton = document.getElementById("today-tasks");
-todayButton.addEventListener("click", (e) => {
+todayButton.addEventListener("click", () => {
     tasksFiltered = true;
     filteredByDate = true;
     filteredByProject = false;
@@ -104,7 +104,7 @@ todayButton.addEventListener("click", (e) => {
 });
 
 let weekButton = document.getElementById("week-tasks");
-weekButton.addEventListener("click", (e) => {
+weekButton.addEventListener("click", () => {
     tasksFiltered = true;
     filteredByDate = true;
     filteredByProject = false;
@@ -117,11 +117,11 @@ weekButton.addEventListener("click", (e) => {
 
     filterTasksByDate();
     displayFilteredTasks();
-})
+});
 
 
 let projectSection = document.getElementById("projects");
-projectSection.addEventListener("click", (e) => {
+projectSection.addEventListener("click", () => {
     tasksFiltered = true;
     filteredByProject = true;
     filteredByDate = false;
@@ -144,7 +144,7 @@ function filterTasksByProject() {
     taskList.forEach(task => {
         if (task.projectSelection == projectHeader) {
             filteredTasks.push(task);
-        };
+        }
     });
 }
 
@@ -165,10 +165,9 @@ function filterTasksByDate() {
             if (taskDueDate <= oneWeekDateObject) {
                 filteredTasks.push(task);
             }   
-        };
+        }
     });
-    console.log("filteredTasks:" + filteredTasks);
-};
+}
 
 let submitEditsBtn = document.getElementById("submit-edits-button");
 submitEditsBtn.addEventListener("click", (e) => {
@@ -176,11 +175,11 @@ submitEditsBtn.addEventListener("click", (e) => {
 
     let currentTask = getSelectedTask();
 
-    if (tasksFiltered == true) {
+    if (tasksFiltered) {
         submitEdits(currentTask);
-        if (filteredByProject = true) {
+        if (filteredByProject) {
             filterTasksByProject();
-        } else if (filteredByDate = true) {
+        } else if (filteredByDate) {
             filterTasksByDate();
         }
         displayFilteredTasks();
@@ -195,7 +194,7 @@ function getDate() {
     const date = new Date().toLocaleDateString(undefined, options);
     const [month, day, year] = date.split("/");
     return `${year}-${month}-${day}`;
-}; 
+}
 
 function getWeekDate() {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
