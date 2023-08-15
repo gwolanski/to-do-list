@@ -119,6 +119,7 @@ function displayTask(task) {
     deleteTaskBtn.src = "./images/trash-black.png";
     deleteTaskBtn.addEventListener("click", () => {
         deleteTask(task);
+        storeTaskList();
     })
 
     tasks.appendChild(taskContainer);
