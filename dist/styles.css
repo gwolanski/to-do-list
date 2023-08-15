@@ -182,6 +182,7 @@ body {
     cursor: pointer;
 }
 
+
 #color-key-container {
     display: flex;
     flex-direction: row;
@@ -248,9 +249,10 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 5px;
+    align-items: center;
 }
 
-#form-title {
+.form-title {
     font-size: 1.4rem;
     font-weight: bold;
 }
@@ -262,6 +264,16 @@ body {
 .form-input {
     grid-column: 2;
     width: 225px;
+}
+
+#date-input,
+#priority-input,
+#project-selection,
+#edit-date-input,
+#edit-priority-input,
+#edit-project-selection {
+    height: 80%;
+    font-size: 1rem;
 }
 
 #date-input,
@@ -302,6 +314,8 @@ body {
 #submit-button,
 #submit-edits-button {
     grid-row: 7;
+    font-size: 1.2rem;
+    background-color: rgb(246, 255, 196);
 }
 
 #close-button,
