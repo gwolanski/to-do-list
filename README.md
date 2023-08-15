@@ -22,6 +22,7 @@ I was also exposed to some new concepts and tools that I haven't worked with pre
     -Edit functionality
     -Filtering functionality
     -localStorage
+    -ESLint
 
 
 Overall, this is the second project in a row that I feel like things have finally "clicked" when it comes to Javascript. I am getting stumped way less often and am finding solutions much quicker. 
