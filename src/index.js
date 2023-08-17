@@ -56,7 +56,6 @@ function validateForm() {
         return false;
     } else {
         submitTask();
-        getCheckboxStates();
         if (tasksFiltered) {
             if (filteredByProject) {
                 filterTasksByProject();
@@ -64,8 +63,10 @@ function validateForm() {
                 filterTasksByDate();
             }
             displayFilteredTasks();
+            getCheckboxStates();
         } else {
             displayAllTasks();
+            getCheckboxStates();
         }
     }
 }

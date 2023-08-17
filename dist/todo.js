@@ -242,7 +242,6 @@ function saveCheckboxStates() {
     checkboxes = document.querySelectorAll("input[type=checkbox");
     for (let i = 0; i < checkboxes.length; i++) {
         localStorage.setItem(checkboxes[i].id, checkboxes[i].checked);
-        //this correctly shows whether a checkbox is checked
     }
 }
 
