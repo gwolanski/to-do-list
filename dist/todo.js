@@ -2,6 +2,7 @@ export let taskList = [];
 export let filteredTasks = [];
 let taskForm = document.getElementById("task-form");
 export let editTaskFormContainer = document.getElementById("edit-form-container");
+let checkboxes;
 
 
 
@@ -17,6 +18,7 @@ export default function submitTask() {
     taskList.push(task);
 
     storeTaskList();
+    saveCheckboxStates();
 
     closeTaskForm();
     
@@ -58,14 +60,21 @@ function displayTask(task) {
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.classList.add("checkbox");
+    checkbox.setAttribute("id", `${task.title}`);
     checkbox.addEventListener("change", function() {
         if (this.checked) {
             taskContainer.classList.add("checked");
             task.taskComplete = true;
+            localStorage.setItem("checkboxState", "checked");
         } else {
             taskContainer.classList.remove("checked");
             task.taskComplete = false;
+            localStorage.removeItem("checkboxState");
         }
+        storeTaskList();
+        saveCheckboxStates();
+        getCheckboxStates();
     })
 
     if (task.taskComplete == true) {
@@ -120,6 +129,7 @@ function displayTask(task) {
     deleteTaskBtn.addEventListener("click", () => {
         deleteTask(task);
         storeTaskList();
+        saveCheckboxStates()
     })
 
     tasks.appendChild(taskContainer);
@@ -207,6 +217,7 @@ export function submitEdits(task) {
     } else {
         editTaskFormContainer.style.display = "none";
         storeTaskList();
+        saveCheckboxStates()
         displayAllTasks();
      }
 
@@ -226,3 +237,20 @@ function getTaskList() {
 }
 
 getTaskList();
+
+function saveCheckboxStates() {
+    checkboxes = document.querySelectorAll("input[type=checkbox");
+    for (let i = 0; i < checkboxes.length; i++) {
+        localStorage.setItem(checkboxes[i].id, checkboxes[i].checked);
+        //this correctly shows whether a checkbox is checked
+    }
+}
+
+export function getCheckboxStates() {
+    checkboxes = document.querySelectorAll("input[type=checkbox]");
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = localStorage.getItem(checkboxes[i].id) === "true";
+        }
+}
+
+document.addEventListener("DOMContentLoaded", getCheckboxStates);

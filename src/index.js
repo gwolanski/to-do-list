@@ -1,5 +1,5 @@
 import submitTask from "../dist/todo";
-import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask} from "../dist/todo";
+import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask, getCheckboxStates} from "../dist/todo";
 import submitNewProject from "../dist/projects";
 import { removeError, selectionHeaderContainer} from "../dist/projects";
 
@@ -56,6 +56,7 @@ function validateForm() {
         return false;
     } else {
         submitTask();
+        getCheckboxStates();
         if (tasksFiltered) {
             if (filteredByProject) {
                 filterTasksByProject();
