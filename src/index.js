@@ -1,7 +1,7 @@
 import submitTask from "../dist/todo";
-import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask, getCheckboxStates} from "../dist/todo";
+import { closeTaskForm, taskList, displayFilteredTasks, filteredTasks, displayAllTasks, closeEditForm, submitEdits, getSelectedTask, getCheckboxStates } from "../dist/todo";
 import submitNewProject from "../dist/projects";
-import { removeError, selectionHeaderContainer} from "../dist/projects";
+import { removeError, selectionHeaderContainer } from "../dist/projects";
 
 let tasksFiltered = false;
 let filteredByProject = false;
@@ -27,7 +27,7 @@ newProjectSubmit.addEventListener("click", submitNewProject);
    
 let newTaskButton = document.getElementById("new-task-container");
 newTaskButton.addEventListener("click", () => {
-    taskFormContainer.style.display= "block";
+    taskFormContainer.style.display = "block";
 });
 
 let closeButton = document.getElementById("close-button");
@@ -79,6 +79,7 @@ allTasksButton.addEventListener("click", () => {
     allTaskHeader();
 
     displayAllTasks();
+    getCheckboxStates();
 });
 
 function allTaskHeader() {
@@ -103,6 +104,7 @@ todayButton.addEventListener("click", () => {
 
     filterTasksByDate();
     displayFilteredTasks();
+    getCheckboxStates();
 });
 
 let weekButton = document.getElementById("week-tasks");
@@ -119,6 +121,7 @@ weekButton.addEventListener("click", () => {
 
     filterTasksByDate();
     displayFilteredTasks();
+    getCheckboxStates();
 });
 
 
@@ -130,6 +133,7 @@ projectSection.addEventListener("click", () => {
 
     filterTasksByProject();
     displayFilteredTasks();
+    getCheckboxStates();
 });
 
 projectSection.addEventListener("click", (e) => {
@@ -137,6 +141,7 @@ projectSection.addEventListener("click", (e) => {
         tasksFiltered = false;
         allTaskHeader();
         displayAllTasks();
+        getCheckboxStates();
     }
 });
 
@@ -185,9 +190,10 @@ submitEditsBtn.addEventListener("click", (e) => {
             filterTasksByDate();
         }
         displayFilteredTasks();
-        
+        getCheckboxStates();
     } else {
         submitEdits(currentTask);
+        getCheckboxStates();
     } 
 });
 
@@ -215,5 +221,3 @@ function getFilteredHeader() {
 
 document.getElementById("edit-date-input").setAttribute("min", getDate());
 document.getElementById("date-input").setAttribute("min", getDate());
-
-

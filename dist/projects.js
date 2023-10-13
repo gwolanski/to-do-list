@@ -37,7 +37,7 @@ export default function submitNewProject() {
 
     populateProjectDropdown();
 
-    return projectList
+    return projectList;
 }
 
 export function removeError(){
@@ -67,14 +67,14 @@ function displayProjects() {
             projectHeader.innerHTML = projectList[i];
             projectHeader.setAttribute("id", "selection-header");
             selectionHeaderContainer.appendChild(projectHeader);
-        })
+        });
 
         let deleteProjectBtn = document.createElement("img");
         deleteProjectBtn.classList.add("delete-project");
         deleteProjectBtn.src = "./images/trash.png";
         deleteProjectBtn.addEventListener("click", () => {
             deleteProject(i);
-        })
+        });
         projectContainer.appendChild(deleteProjectBtn);
     }
 }
@@ -112,11 +112,11 @@ function populateProjectDropdown() {
     }
 }
 
-function storeProjectList() { 
+function storeProjectList() {
     localStorage.setItem('projects', JSON.stringify(projectList));
 }
 
-function getProjectList() { 
+function getProjectList() {
     let storedProjects = localStorage.getItem('projects');
     if (storedProjects) {
         let parsedProjects = JSON.parse(storedProjects);

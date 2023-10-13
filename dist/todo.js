@@ -3,6 +3,7 @@ export let filteredTasks = [];
 let taskForm = document.getElementById("task-form");
 export let editTaskFormContainer = document.getElementById("edit-form-container");
 let checkboxes;
+let taskID = 0;
 
 
 
@@ -38,9 +39,11 @@ class Task {
 export function displayAllTasks() {
     let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
+    taskID = 0;
 
     for (let i = 0; i < taskList.length; i++) {
-        displayTask(taskList[i]);        
+        displayTask(taskList[i]);
+        taskID++;        
     }
 
 }
@@ -48,8 +51,11 @@ export function displayAllTasks() {
 export function displayFilteredTasks() {
     let tasks = document.getElementById("tasks");
     tasks.innerHTML = "";
+    taskID = 0;
+
     for (let i = 0; i < filteredTasks.length; i++) {
         displayTask(filteredTasks[i]);
+        taskID++;
     }
 }
 
@@ -61,7 +67,7 @@ function displayTask(task) {
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox");
-    checkbox.setAttribute("id", `${task.title}`);
+    checkbox.setAttribute("id", taskID);
     checkbox.addEventListener("change", function() {
         if (this.checked) {
             taskContainer.classList.add("checked");
@@ -157,12 +163,13 @@ function displayTask(task) {
 function deleteTask(task) {
     const index = taskList.indexOf(task);
     taskList.splice(index, 1);
-    displayAllTasks(); 
+    displayAllTasks();
+    getCheckboxStates();
 }
 
 export function closeTaskForm() {
     let taskFormContainer = document.getElementById("form-container");
-    taskFormContainer.style.display= "none";
+    taskFormContainer.style.display = "none";
     taskForm.reset();
 }
 
@@ -192,7 +199,7 @@ function displayEditForm(task) {
 }
 
 export function getSelectedTask() {
-    return displayEditForm.selectedTask;  
+    return displayEditForm.selectedTask;
 }
 
 export function submitEdits(task) {
@@ -217,17 +224,18 @@ export function submitEdits(task) {
     } else {
         editTaskFormContainer.style.display = "none";
         storeTaskList();
-        saveCheckboxStates()
+        saveCheckboxStates();
+        getCheckboxStates();
         displayAllTasks();
      }
 
 }
 
-function storeTaskList() { 
+function storeTaskList() {
     localStorage.setItem('tasks', JSON.stringify(taskList));
 }
 
-function getTaskList() { 
+function getTaskList() {
     let storedTasks = localStorage.getItem('tasks');
     if (storedTasks) {
         let parsedTasks = JSON.parse(storedTasks);
@@ -251,5 +259,6 @@ export function getCheckboxStates() {
         checkboxes[i].checked = localStorage.getItem(checkboxes[i].id) === "true";
         }
 }
+
 
 document.addEventListener("DOMContentLoaded", getCheckboxStates);
