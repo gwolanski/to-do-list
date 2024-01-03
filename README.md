@@ -25,3 +25,5 @@ I was also exposed to some new concepts and tools that I haven't worked with pre
 -ESLint
 
 Overall, this is the second project in a row that I feel like things have finally clicked when it comes to JavaScript. I am getting stumped way less often and am finding solutions much quicker. This project was a bit of a heavy-weight in that it utilized so many different concepts and tools. For this reason, my growth as a result of this project was substantial.
+
+Link to page: https://gwolanski.github.io/to-do-list/
